@@ -1,0 +1,220 @@
+---
+layout: base
+---
+<!-- Section Started Heading -->
+<section class="section section-inner started-heading">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="m-titles align-center">
+      <div class="m-category scrolla-element-anim-1 scroll-animate" data-animate="active">
+        <a href="{{ page.url | relative_url }}">{{ page.categories[0] }}</a>, <a href="{{ page.url | relative_url }}">{{ page.categories[1] }}</a> / {{ page.date | date: "%B %d, %Y" }} / by {{ page.author }}
+      </div>
+      <h1 class="m-title scrolla-element-anim-1 scroll-animate" data-animate="active">
+        {{ page.title }}
+      </h1>
+    </div>
+
+  </div>
+</section>
+
+<!-- Single Post Image -->
+<div class="section section-inner m-image-large">
+<div class="container">
+  <div class="v-line-right v-line-top"><div class="v-line-block"><span></span></div></div>
+</div>
+<div class="image">
+  <div class="img scrolla-element-anim-1 scroll-animate" data-animate="active" style="background-image: url('{{ page.featured_image | relative_url }}');"></div>
+</div>
+</div>
+
+<!-- Section - Blog -->
+<section class="section section-inner m-archive">
+  <div class="container">
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 offset-1">
+                <!-- content -->
+              <div class="description">
+                  <div class="post-content scrolla-element-anim-1 scroll-animate" data-animate="active">
+                      <p class="lead">{{ page.lead_text }}</p>
+<!--                        #TODO take format from post as it is check if it exists and add-->
+                      {{ content }}  <!-- This renders the actual Markdown content -->
+                      {% if page.tags %}
+                        <span class="tags-links">
+                          <span>Tags:</span>
+                          {% for tag in page.tags %}
+                            <a href="{{ site.baseurl }}/tags/{{ tag | slugify }}">{{ tag | capitalize }}</a>
+                          {% endfor %}
+                        </span>
+                      {% endif %}
+                  </div>
+              </div>
+
+              <!-- Comments Section -->
+              <div class="comments-post scrolla-element-anim-1 scroll-animate" data-animate="active">
+                <div class="section__comments">
+                  <!-- Comment Count -->
+                  <div class="m-titles">
+                    <div class="m-title align-left">
+                      {% assign comments = site.data.comments[page.slug] %}
+                      {% if comments %}
+                        {{ comments | size }} Comments
+                      {% else %}
+                        No Comments Yet
+                      {% endif %}
+                    </div>
+                  </div>
+                    <ul class="comments">
+                      {% for comment in site.data.comments[page.slug] %}
+                      <li class="comment comment-item" data-comment-id="{{ comment.id }}">
+                        <div class="comment-box">
+                          <img src="/assets/images/avatar.png" class="avatar" alt="">
+                          <div class="comment-box__body">
+                            <h5 class="comment-box__details">{{ comment.name }} <span>{{ comment.date }}</span></h5>
+                            <p>{{ comment.comment }}</p>
+                          </div>
+                          <div class="comment-footer">
+                            <a class="comment-reply-link" href="#" onclick="showReplyForm('{{ comment.id }}')">Reply</a>
+                          </div>
+                        </div>
+                        {% if comment.replies %}
+                          <ul class="replies">
+                            {% for reply in comment.replies %}
+                              <li class="comment comment-item reply">
+                                <div class="comment-box">
+                                  <img src="/assets/images/avatar.png" class="avatar" alt="">
+                                  <div class="comment-box__body">
+                                    <h5 class="comment-box__details">{{ reply.name }} <span>{{ reply.date }}</span></h5>
+                                    <p>{{ reply.comment }}</p>
+                                  </div>
+                                </div>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+
+                        <!-- Reply Form -->
+                        <div id="reply-form-{{ comment.id }}" class="reply-form" style="display:none;">
+                          <form onsubmit="submitReply(event, '{{ comment.id }}')">
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                            <div class="group-row">
+                              <div class="group">
+                                <textarea class="textarea" name="reply_comment" rows="2" placeholder="Reply"></textarea>
+                              </div>
+                            </div>
+                            <div class="group-row">
+                              <div class="group">
+                                <input type="text" name="reply_name" class="input" placeholder="Name" required>
+                              </div>
+                              <div class="group">
+                                <input type="email" name="reply_email" class="input" placeholder="Email (not shown)" required>
+                              </div>
+                            </div>
+                            <div class="group-row">
+                              <div class="group">
+                                <button type="submit" class="btn">Submit</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </li>
+                      {% endfor %}
+                    </ul>
+
+                  <!-- Comment  Form -->
+                  <div class="form-comment">
+                    <div class="comment-respond">
+                      <div class="m-titles">
+                        <div class="m-title align-left">Leave a comment</div>
+                      </div>
+                      <form id="commentForm">
+                        <input type="hidden" name="options[slug]" value="{{ page.slug }}">
+                        <input type="hidden" name="fields[date]" value="{{ 'now' | date: '%Y-%m-%d' }}">
+
+                        <div class="group-row">
+                          <div class="group">
+                            <textarea class="textarea" name="fields[comment]" rows="3" placeholder="Comment" required></textarea>
+                          </div>
+                        </div>
+
+                        <div class="group-row">
+                          <div class="group">
+                            <input type="text" name="fields[name]" class="input" placeholder="Name" required>
+                          </div>
+                          <div class="group">
+                            <input type="email" name="fields[email]" class="input" placeholder="Email (not shown)" required>
+                          </div>
+                        </div>
+
+                        <div class="group-row">
+                          <div class="group">
+                            <button type="submit" class="btn">Submit</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- Popup for Comment Submission Message -->
+                  <div id="commentPopup" class="modal">
+                    <div class="modal-content">
+                      <p id="commentMessage"></p>
+                      <button onclick="closePopup()">OK</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+      </div>
+    <div class="v-line-left v-line-top"><div class="v-line-block"><span></span></div></div>
+  </div>
+</section>
+
+<!-- Section Navigation -->
+<div class="section section-inner m-page-navigation">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 offset-1">
+
+      <div class="h-titles h-navs">
+        {% assign posts_sorted = site.posts | sort: "date" | reverse %}
+        {% for post in posts_sorted %}
+          {% if post.url == page.url %}
+            {% assign prev_index = forloop.index0 | minus: 1 %}
+            {% assign next_index = forloop.index0 | plus: 1 %}
+
+            {% if prev_index >= 0 %}
+              {% assign prev_post = posts_sorted[prev_index] %}
+            {% endif %}
+
+            {% if next_index < posts_sorted.size %}
+              {% assign next_post = posts_sorted[next_index] %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        <div class="h-titles h-navs">
+          {% if prev_post %}
+            <a href="{{ prev_post.url | relative_url }}">
+              <span class="nav-arrow scroll-animate">Previous Article</span>
+              <span class="h-title">{{ prev_post.title }}</span>
+            </a>
+          {% endif %}
+
+          {% if next_post %}
+            <a href="{{ next_post.url | relative_url }}">
+              <span class="nav-arrow scroll-animate">Next Article</span>
+              <span class="h-title">{{ next_post.title }}</span>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% if page.comments %}
+  <script src="{{ '/assets/js/comments.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/reply.js' | relative_url }}" defer></script>
+{% endif %}

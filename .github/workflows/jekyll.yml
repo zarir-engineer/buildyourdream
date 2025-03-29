@@ -1,0 +1,59 @@
+name: Build and Deploy Jekyll Site
+
+on:
+  push:
+    branches:
+      - main  # Runs when changes are pushed to main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Needed for switching branches
+
+      - name: Install ImageMagick (Fix for rmagick)
+        run: sudo apt-get update && sudo apt-get install -y libmagickwand-dev imagemagick
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+
+      - name: Install Dependencies
+        run: bundle install
+
+      - name: Build Jekyll Site with Debugging
+        env:
+          JEKYLL_ENV: production
+        run: |
+          bundle exec jekyll build --trace --verbose
+
+      - name: Set Git Identity  # ✅ ADD THIS STEP BEFORE COPYING FILES
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Copy Required Folders from main to gh-pages
+        run: |
+          git checkout main -- _data _includes _layouts _posts
+
+          mkdir -p _data/comments _includes _layouts _posts  # Ensure directories exist
+          rsync -av --progress _data/ _site/_data/
+          rsync -av --progress _includes/ _site/_includes/
+          rsync -av --progress _layouts/ _site/_layouts/
+          rsync -av --progress _posts/ _site/_posts/
+
+          git add -f _data _includes _layouts _posts
+          git commit -m "Sync site data from main" || echo "No changes to commit"
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # Deploy to gh-pages
+          folder: _site  # Deploy built Jekyll site
+          token: ${{ secrets.GH_PAT }}  # Use your Personal Access Token

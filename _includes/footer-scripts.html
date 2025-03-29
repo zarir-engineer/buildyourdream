@@ -1,0 +1,14 @@
+<!-- cursor -->
+<div class="cursor"></div>
+
+{% if site.data.common.common-ext-js %}
+    {% for js in site.data.common.common-ext-js %}
+        <script src="{{ js.href }}" {% if js.sri %}integrity="{{ js.sri }}" crossorigin="anonymous"{% endif %}></script>
+    {% endfor %}
+{% endif %}
+
+{% if site.data.common.common-js %}
+    {% for js in site.data.common.common-js %}
+        <script src="{{ js | relative_url }}"></script>
+    {% endfor %}
+{% endif %}

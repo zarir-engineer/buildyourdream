@@ -1,0 +1,161 @@
+---
+layout: base
+title: All Blogs
+pagination:
+  enabled: true
+---
+
+<!-- Wrapper -->
+<div class="wrapper">
+
+<!-- Section Started Heading -->
+  <section class="section section-inner started-heading">
+<div class="container">
+
+        <!-- Heading -->
+  <div class="m-titles align-center">
+    <h1 class="m-title splitting-text-anim-1 scroll-animate" data-splitting="words" data-animate="active">
+      <span> Our Blogs </span>
+    </h1>
+    <div class="m-subtitle splitting-text-anim-1 scroll-animate" data-splitting="words" data-animate="active">
+      <span> Recent Articles </span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- Section - Blog -->
+  <div class="section section-inner m-archive">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+
+              <!-- Blog Items -->
+              <div class="articles-container">
+                  {% if paginator.posts %}
+                    {% for post in paginator.posts %}
+                      <article>
+                        <div class="archive-item scrolla-element-anim-1 scroll-animate" data-animate="active">
+                          {% if post.featured_image %}
+                            <div class="image">
+                              <a href="{{ post.url | relative_url }}">
+                                <img src="{{ post.featured_image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+                              </a>
+                            </div>
+                          {% endif %}
+                          <div class="desc">
+                            {% if post.date %}
+                              <div class="category lui-subtitle">
+                                <span>{{ post.date | date: "%B %d, %Y" }}</span>
+                              </div>
+                            {% endif %}
+                            {% if post.title %}
+                              <h5 class="lui-title">
+                                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                              </h5>
+                            {% endif %}
+                            <div class="lui-text">
+                              {% if post.lead_text %}
+                                <p>{{ post.lead_text }}</p>
+                              {% endif %}
+                              <div class="readmore">
+                                <a href="{{ post.url | relative_url }}" class="lnk">Read more</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    {% endfor %}
+                  {% else %}
+                    <p>No posts found. Check pagination settings.</p>
+                  {% endif %}
+                    {% include pagination.html %}
+              </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+
+          <!-- sidebar -->
+          <div class="col__sedebar scrolla-element-anim-1 scroll-animate" data-animate="active">
+            <div class="content-sidebar">
+              <aside class="widget-area">
+
+                <div class="widget widget_block widget_search">
+                  <form class="wp-block-search">
+                    <div class="wp-block-search__inside-wrapper">
+                      <input type="search" class="wp-block-search__input wp-block-search__input" value="">
+                      <button type="submit" class="wp-block-search__button wp-element-button">Search</button>
+                    </div>
+                  </form>
+                </div>
+
+                <section class="widget widget_block">
+                  <div class="wp-block-group">
+                    <div class="wp-block-group__inner-container">
+                      <h2>Recent Posts</h2>
+                      <ul class="wp-block-latest-posts__list wp-block-latest-posts">
+                        <li><a class="wp-block-latest-posts__post-title" href="{{ 'all-blogs/exploring_south_mumbai_real_estate.html' | relative_url }}">Exploring South Mumbai Real Estate</a></li>
+                        <li><a class="wp-block-latest-posts__post-title" href="{{ 'all-blogs/impact_of_new_infrastructure.html' | relative_url }}">The Impact of New Infrastructure Developments on Mumbai’s Real Estate Market</a></li>
+                        <li><a class="wp-block-latest-posts__post-title" href="{{ 'all-blogs/repurposing_old_window_frames.html' | relative_url }}">Repurposing Old Window Frames: A Creative DIY Project</a></li>
+<!--                        <li><a class="wp-block-latest-posts__post-title" href="{{ site.baseurl }}/blog-single/">Three Ways To Level Up Your Photography</a></li>-->
+<!--                        <li><a class="wp-block-latest-posts__post-title" href="{{ site.baseurl }}/blog-single/">10 Useful Tips to Improve Your Skills</a></li>-->
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="widget widget_block">
+                  <div class="wp-block-group">
+                    <div class="wp-block-group__inner-container">
+                      <h2>Recent Comments</h2>
+                      <ul class="wp-block-latest-comments">
+                        <li class="wp-block-latest-comments__comment">
+                          <span class="wp-block-latest-comments__comment-author">Ryan Berg</span> on <a class="wp-block-latest-comments__comment-link" href="{{ 'all-blogs/exploring_south_mumbai_real_estate.html' | relative_url }}">Exploring South Mumbai Real Estate</a>
+                        </li>
+                        <li class="wp-block-latest-comments__comment">
+                          <span class="wp-block-latest-comments__comment-author">Robert Brown</span> on <a class="wp-block-latest-comments__comment-link" href="{{ 'all-blogs/exploring_south_mumbai_real_estate.html' | relative_url }}">Exploring South Mumbai Real Estate</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="widget widget_block">
+                  <div class="wp-block-group">
+                    <div class="wp-block-group__inner-container">
+                      <h2>Archives</h2>
+                      <ul class="wp-block-archives-list wp-block-archives">
+                        <li><a href="{{ site.baseurl }}/blog-single/">October 2022</a></li>
+                        <li><a href="{{ site.baseurl }}/blog-single/">November 2021</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="widget widget_block">
+                  <div class="is-layout-flow wp-block-group">
+                    <div class="wp-block-group__inner-container">
+                      <h2>Categories</h2>
+                      <ul class="wp-block-categories-list wp-block-categories">
+                        <li class="cat-item cat-item-2"><a href="{{ site.baseurl }}/blog-single/">Branding</a></li>
+                        <li class="cat-item cat-item-3"><a href="{{ site.baseurl }}/blog-single/">Photography</a></li>
+                        <li class="cat-item cat-item-4"><a href="{{ site.baseurl }}/blog-single/">UI Design</a></li>
+                        <li class="cat-item cat-item-5"><a href="{{ site.baseurl }}/blog-single/">UX Design</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
+
+              </aside>
+            </div>
+          </div>
+
+      </div>
+      </div>
+
+      <div class="v-line-left v-line-top"><div class="v-line-block"><span></span></div></div>
+
+    </div>
+  </div>
+</div>

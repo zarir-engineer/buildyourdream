@@ -1,0 +1,46 @@
+<div class="contacts-form scrolla-element-anim-1 scroll-animate" data-animate="active">
+  <div class="bg-img" style="background-image: url(assets/images/pat-1.png);"></div>
+  <div class="contacts-form">
+    <form action="https://formspree.io/f/mlddkkkj" method="POST">
+      <div class="row">
+        <input type="hidden" name="_next" value="{{ '/thank-you/' | relative_url }}">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <div class="group">
+            <label>
+              Your Full Name <b>*</b>
+              <input type="text" name="name" >
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <div class="group">
+            <label>
+              Your Email Address <b>*</b>
+              <input type="email" name="email" >
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="group">
+            <label>
+              Your Subject <b>*</b>
+              <input type="text" name="subject" >
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="group">
+            <label>
+              Your Message <b>*</b>
+              <textarea name="message"></textarea>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 align-right">
+          <div class="terms-label">* Accept the terms and conditions.</div>
+            <button type="submit">Send</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

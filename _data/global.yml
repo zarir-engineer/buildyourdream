@@ -1,0 +1,19 @@
+# Site Settings
+salutation: "Hello"
+title_header: "I'm"
+title_name: "Zarir"
+title_surname: "Engineer"
+intro: "I am a "
+job_title: "Realtor"
+description: "From India, Mumbai. I have rich experiencess in giving you a dream home, also I am good at negotiations. I love to talk with you about a few unique proposals."
+url: 'http://zarirengineer.github.io/buildyourhome/' # the base hostname & protocol for your site
+nav: "true"
+footer_text: '© 2025 Zarir Engineer'
+twitter: 'jamigibbs'
+github: 'zarirengineer'
+medium:
+
+# Admin Settings
+admin_name: 'Zarir Engineer'
+admin_email: 'zarir.utube@gmail.com'
+google_analytics: "UA-9999999-99" # Update with your own tracking ID

@@ -1,0 +1,8 @@
+- name: "John Doe"
+  email: "johndoe@example.com"
+  comment: "This is a great article!"
+  date: "2024-03-12"
+- name: "Jane Smith"
+  email: "janesmith@example.com"
+  comment: "Thanks for the helpful guide!"
+  date: "2024-03-12"
