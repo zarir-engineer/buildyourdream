@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
             comment: formData.get("comment"),  // Ensure your form has a textarea named "comment"
             slug: form.dataset.slug  // Assuming the post/page has a data attribute for slug
         };
+        console.log("Sending commentData:", JSON.stringify(commentData));
 
         try {
-            console.log("Sending commentData:", JSON.stringify(commentData));
             const response = await fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
