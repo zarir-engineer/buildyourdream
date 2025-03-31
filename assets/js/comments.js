@@ -16,37 +16,37 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         console.log("Sending commentData:", JSON.stringify(commentData));
 
-        try {
-            const response = await fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(commentData)
-            });
+//        try {
+        const response = await fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(commentData)
+        });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const result = await response.json();
-
-            if (result.success) {
-                messageBox.innerText = "Comment submitted successfully!";
-                form.reset(); // Clear the form fields
-                popup.style.display = "block"; // Show popup
-
-                // Optionally reload comments without refreshing
-                if (commentData.slug) {
-                    loadComments(commentData.slug);
-                }
-            } else {
-                throw new Error(result.message || "Error submitting comment.");
-            }
-
-        } catch (error) {
-            console.error("Error:", error);
-            messageBox.innerText = "An error occurred. Please try again.";
-            popup.style.display = "block";
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
+        const result = await response.json();
+
+        if (result.success) {
+            messageBox.innerText = "Comment submitted successfully!";
+            form.reset(); // Clear the form fields
+            popup.style.display = "block"; // Show popup
+
+            // Optionally reload comments without refreshing
+            if (commentData.slug) {
+                loadComments(commentData.slug);
+            }
+        } else {
+            throw new Error(result.message || "Error submitting comment.");
+        }
+
+//        } catch (error) {
+//            console.error("Error:", error);
+//            messageBox.innerText = "An error occurred. Please try again.";
+//            popup.style.display = "block";
+//        }
     });
 });
 
