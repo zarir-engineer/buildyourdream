@@ -6,6 +6,15 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", async function(event) {
         event.preventDefault(); // Prevent default form submission behavior
 
+        // Extract data from the form
+        const formData = new FormData(form);
+        const commentData = {
+            name: formData.get("name"),  // Ensure your form has an input named "name"
+            email: formData.get("email"),  // Ensure your form has an input named "email"
+            comment: formData.get("comment"),  // Ensure your form has a textarea named "comment"
+            slug: form.dataset.slug  // Assuming the post/page has a data attribute for slug
+        };
+
         try {
             const response = await fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments", {
                 method: "POST",
