@@ -86,15 +86,24 @@ async function loadComments(slug) {
         comments.forEach(comment => {
             const commentItem = document.createElement("li");
             commentItem.classList.add("comment", "comment-item");
+            const formattedDate = comment.timestamp
+                ? new Date(comment.timestamp).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric"
+                })
+                : "Unknown Date";
+
             commentItem.innerHTML = `
                 <div class="comment-box">
                     <img src="/assets/images/avatar.png" class="avatar" alt="">
                     <div class="comment-box__body">
-                        <h5 class="comment-box__details">${comment.name} <span>${new Date(comment.date).toLocaleDateString()}</span></h5>
+                        <h5 class="comment-box__details">${comment.name} <span>${formattedDate}</span></h5>
                         <p>${comment.comment}</p>
                     </div>
                 </div>
             `;
+
             commentsContainer.appendChild(commentItem);
         });
 
