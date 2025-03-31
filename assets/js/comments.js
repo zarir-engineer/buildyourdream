@@ -68,9 +68,8 @@ function closePopup() {
     document.getElementById("commentPopup").style.display = "none";
 }
 
-// (Optional) Function to reload comments without refreshing
 async function loadComments(slug) {
-    console.log("Loading comments for slug:", slug); // Debugging log
+    console.log("Loading comments for:", slug);
 
     if (!slug) {
         console.error("Slug is missing!");
@@ -80,9 +79,9 @@ async function loadComments(slug) {
     try {
         const response = await fetch(`https://jekyll-comments-backend-production-8c02.up.railway.app/comments/${slug}?t=${Date.now()}`);
         if (!response.ok) throw new Error("Failed to fetch comments");
-        const comments = await response.json();
 
-        console.log("+++ Fetched comments:", comments); // Debugging log
+        const comments = await response.json();
+        console.log("Fetched comments:", comments);
 
         const commentsContainer = document.querySelector(".comments");
         if (!commentsContainer) {
@@ -92,9 +91,12 @@ async function loadComments(slug) {
 
         commentsContainer.innerHTML = ""; // Clear old comments
 
+        if (!Array.isArray(comments) || comments.length === 0) {
+            commentsContainer.innerHTML = "<p>No comments yet. Be the first to comment!</p>";
+            return;
+        }
+
         comments.forEach(comment => {
-            const commentItem = document.createElement("li");
-            commentItem.classList.add("comment", "comment-item");
             const formattedDate = comment.timestamp
                 ? new Date(comment.timestamp).toLocaleDateString("en-US", {
                     year: "numeric",
@@ -103,6 +105,8 @@ async function loadComments(slug) {
                 })
                 : "Unknown Date";
 
+            const commentItem = document.createElement("li");
+            commentItem.classList.add("comment", "comment-item");
             commentItem.innerHTML = `
                 <div class="comment-box">
                     <img src="/assets/images/avatar.png" class="avatar" alt="">
@@ -112,11 +116,10 @@ async function loadComments(slug) {
                     </div>
                 </div>
             `;
-
             commentsContainer.appendChild(commentItem);
         });
 
-        console.log("Comments updated successfully");
+        console.log("✅ Comments updated successfully");
 
     } catch (error) {
         console.error("Error loading comments:", error);
