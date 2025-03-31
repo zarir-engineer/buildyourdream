@@ -3,6 +3,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const messageBox = document.getElementById("commentMessage");
     const popup = document.getElementById("commentPopup");
 
+    const slugElement = document.querySelector("[name='options[slug]']");
+    if (slugElement) {
+        const slug = slugElement.value;
+        console.log("Calling loadComments for slug:", slug);
+        loadComments(slug); // Ensure it runs on page load
+    } else {
+        console.error("Slug not found on the page!");
+    }
+
     form.addEventListener("submit", async function(event) {
         event.preventDefault(); // Prevent default form submission behavior
 
