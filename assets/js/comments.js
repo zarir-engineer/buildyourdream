@@ -6,15 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", async function(event) {
         event.preventDefault(); // Prevent default form submission behavior
 
-        // Extract data from the form
-        const name = document.querySelector("[name='name']").value.trim();
-        const email = document.querySelector("[name='email']").value.trim();
-        const comment = document.querySelector("[name='comment']").value.trim();
-        const slug = form.dataset.slug || document.querySelector("[name='slug']")?.value;
+        // Select fields using the correct names
+        const name = document.querySelector("[name='fields[name]']").value.trim();
+        const email = document.querySelector("[name='fields[email]']").value.trim();
+        const comment = document.querySelector("[name='fields[comment]']").value.trim();
+        const slug = document.querySelector("[name='options[slug]']")?.value || null;
 
         if (!name || !email || !comment) {
-            messageBox.innerText = "All fields are required!";
-            popup.style.display = "block";
+            alert("All fields are required!");
             return;
         }
 
@@ -36,22 +35,15 @@ document.addEventListener("DOMContentLoaded", function () {
             const result = await response.json();
 
             if (result.success) {
-                messageBox.innerText = "Comment submitted successfully!";
-                form.reset(); // Clear the form fields
-                popup.style.display = "block"; // Show popup
-
-                // Optionally reload comments without refreshing
-                if (commentData.slug) {
-                    loadComments(commentData.slug);
-                }
+                alert("Comment submitted successfully!");
+                form.reset();
             } else {
                 throw new Error(result.message || "Error submitting comment.");
             }
 
         } catch (error) {
             console.error("Error:", error);
-            messageBox.innerText = "An error occurred. Please try again.";
-            popup.style.display = "block";
+            alert("An error occurred. Please try again.");
         }
     });
 });
