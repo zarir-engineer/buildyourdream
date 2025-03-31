@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         try {
+            console.log("Sending commentData:", JSON.stringify(commentData));
             const response = await fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
