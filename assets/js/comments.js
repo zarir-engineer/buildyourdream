@@ -35,8 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const result = await response.json();
 
             if (result.success) {
-                alert("Comment submitted successfully!");
-                form.reset();
+                messageBox.innerText = "Comment submitted successfully!";
+                form.reset(); // Clear form fields
+                popup.style.display = "block"; // Show confirmation
+
+                // ✅ Call loadComments to refresh the comment list
+                if (commentData.slug) {
+                    loadComments(commentData.slug);
+                }
             } else {
                 throw new Error(result.message || "Error submitting comment.");
             }
