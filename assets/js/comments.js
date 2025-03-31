@@ -3,44 +3,37 @@ document.addEventListener("DOMContentLoaded", function () {
     const messageBox = document.getElementById("commentMessage");
     const popup = document.getElementById("commentPopup");
 
-    form.addEventListener("submit", async function (event) {
-        event.preventDefault(); // Prevents page reload
-
-        const formData = new FormData(form);
-        const commentData = {
-            slug: formData.get("options[slug]"),
-            name: formData.get("fields[name]"),
-            email: formData.get("fields[email]"),
-            comment: formData.get("fields[comment]"),
-            date: new Date().toISOString()
-        };
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault(); // Prevent default form submission behavior
 
         try {
-            const response = await fetch("https://jekyll-comments-backend.onrender.com/comments", {
+            const response = await fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(commentData)
             });
 
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
             const result = await response.json();
 
             if (result.success) {
                 messageBox.innerText = "Comment submitted successfully!";
+                form.reset(); // Clear the form fields
+                popup.style.display = "block"; // Show popup
 
-                // Clear the form fields
-                form.reset();
-
-                // Show popup
-                popup.style.display = "block";
-
-                // Optionally, reload comments (without page refresh)
-                loadComments(commentData.slug);
+                // Optionally reload comments without refreshing
+                if (commentData.slug) {
+                    loadComments(commentData.slug);
+                }
             } else {
-                messageBox.innerText = "Error submitting comment.";
-                popup.style.display = "block";
+                throw new Error(result.message || "Error submitting comment.");
             }
 
         } catch (error) {
+            console.error("Error:", error);
             messageBox.innerText = "An error occurred. Please try again.";
             popup.style.display = "block";
         }
