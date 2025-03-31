@@ -7,46 +7,52 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault(); // Prevent default form submission behavior
 
         // Extract data from the form
-        const formData = new FormData(form);
-        const commentData = {
-            name: formData.get("name"),  // Ensure your form has an input named "name"
-            email: formData.get("email"),  // Ensure your form has an input named "email"
-            comment: formData.get("comment"),  // Ensure your form has a textarea named "comment"
-            slug: form.dataset.slug  // Assuming the post/page has a data attribute for slug
-        };
-        console.log("Sending commentData:", JSON.stringify(commentData));
+        const name = document.querySelector("[name='name']").value.trim();
+        const email = document.querySelector("[name='email']").value.trim();
+        const comment = document.querySelector("[name='comment']").value.trim();
+        const slug = form.dataset.slug || document.querySelector("[name='slug']")?.value;
 
-//        try {
-        const response = await fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(commentData)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!name || !email || !comment) {
+            messageBox.innerText = "All fields are required!";
+            popup.style.display = "block";
+            return;
         }
 
-        const result = await response.json();
+        const commentData = { name, email, comment, slug };
 
-        if (result.success) {
-            messageBox.innerText = "Comment submitted successfully!";
-            form.reset(); // Clear the form fields
-            popup.style.display = "block"; // Show popup
+        console.log("Sending commentData:", JSON.stringify(commentData)); // Debugging
 
-            // Optionally reload comments without refreshing
-            if (commentData.slug) {
-                loadComments(commentData.slug);
+        try {
+            const response = await fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(commentData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-        } else {
-            throw new Error(result.message || "Error submitting comment.");
-        }
 
-//        } catch (error) {
-//            console.error("Error:", error);
-//            messageBox.innerText = "An error occurred. Please try again.";
-//            popup.style.display = "block";
-//        }
+            const result = await response.json();
+
+            if (result.success) {
+                messageBox.innerText = "Comment submitted successfully!";
+                form.reset(); // Clear the form fields
+                popup.style.display = "block"; // Show popup
+
+                // Optionally reload comments without refreshing
+                if (commentData.slug) {
+                    loadComments(commentData.slug);
+                }
+            } else {
+                throw new Error(result.message || "Error submitting comment.");
+            }
+
+        } catch (error) {
+            console.error("Error:", error);
+            messageBox.innerText = "An error occurred. Please try again.";
+            popup.style.display = "block";
+        }
     });
 });
 
