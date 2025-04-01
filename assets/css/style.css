@@ -44,8 +44,8 @@ Version: 1.0
 * Base Styles
 **/
 /* hide reply form */
-.reply-hidden {
-    display: none;
+div.reply-form.reply-hidden {
+  display: none !important;
 }
 
 
