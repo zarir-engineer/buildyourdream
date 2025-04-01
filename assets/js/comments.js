@@ -191,10 +191,15 @@ function createReplyElement(reply) {
 
 // 🔥 SHOW REPLY FORM 🔥
 function showReplyForm(commentId) {
-    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("hidden"));
+    event.preventDefault();  // Stops the page from jumping to the top
+
+    // Hide all other reply forms first
+    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
+
+    // Show the selected reply form
     const replyForm = document.getElementById(`reply-form-${commentId}`);
     if (replyForm) {
-        replyForm.classList.remove("hidden");
+        replyForm.classList.remove("reply-hidden");
     }
 }
 

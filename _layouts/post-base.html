@@ -74,7 +74,7 @@ layout: base
                             <p>{{ comment.comment }}</p>
                           </div>
                           <div class="comment-footer">
-                            <a class="comment-reply-link" href="#" onclick="showReplyForm('{{ comment.id }}')">Reply</a>
+                            <a class="comment-reply-link" href="#" onclick="showReplyForm('{{ comment.id }}'); return false;">Reply</a>
                           </div>
                         </div>
                         {% if comment.replies %}
@@ -94,7 +94,7 @@ layout: base
                         {% endif %}
 
                         <!-- Reply Form -->
-                        <div id="reply-form-{{ comment.id }}" class="reply-form" style="display:none;">
+                        <div id="reply-form-{{ comment.id }}" class="reply-form reply-hidden" style="display:none;">
                           <form onsubmit="submitReply(event, '{{ comment.id }}')">
                             <input type="hidden" name="parent_id" value="{{ comment.id }}">
                             <div class="group-row">
