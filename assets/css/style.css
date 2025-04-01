@@ -43,6 +43,11 @@ Version: 1.0
 /**
 * Base Styles
 **/
+/* hide reply form */
+.reply-hidden {
+    display: none;
+}
+
 
 * {
 	outline: none;
