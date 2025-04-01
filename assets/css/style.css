@@ -43,6 +43,22 @@ Version: 1.0
 /**
 * Base Styles
 **/
+
+/* Add padding or margin to indent replies */
+.comment-item.reply {
+  margin-left: 20px;  /* Adjust the left margin to control the indentation */
+  border-left: 2px solid #ddd; /* Optional: Adds a visual line to separate the reply */
+  padding-left: 10px; /* Optional: Adds space before the reply text */
+}
+
+/* You can add more styles to make the nested reply stand out */
+.comment-item.reply .comment-box__body {
+  background-color: #f9f9f9; /* Optional: Adds a light background to the reply */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+
 /* hide reply form */
 div.reply-form.reply-hidden {
   display: none !important;
