@@ -68,7 +68,7 @@ layout: base
                       {% for comment in site.data.comments[page.slug] %}
                       <li class="comment comment-item" data-comment-id="{{ comment.id }}">
                         <div class="comment-box">
-                          <img src="/assets/images/avatar.png" class="avatar" alt="">
+                          <img src="{{ site.baseurl }}/assets/images/avatar.png" class="avatar" alt="">
                           <div class="comment-box__body">
                             <h5 class="comment-box__details">{{ comment.name }} <span>{{ comment.date }}</span></h5>
                             <p>{{ comment.comment }}</p>
@@ -82,7 +82,7 @@ layout: base
                             {% for reply in comment.replies %}
                               <li class="comment comment-item reply">
                                 <div class="comment-box">
-                                  <img src="/assets/images/avatar.png" class="avatar" alt="">
+                                  <img src="{{ site.baseurl }}/assets/images/avatar.png" class="avatar" alt="">
                                   <div class="comment-box__body">
                                     <h5 class="comment-box__details">{{ reply.name }} <span>{{ reply.date }}</span></h5>
                                     <p>{{ reply.comment }}</p>
