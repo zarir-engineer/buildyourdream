@@ -68,6 +68,7 @@ function closePopup() {
     document.getElementById("commentPopup").style.display = "none";
 }
 
+// 🔥 LOAD COMMENTS INCLUDING REPLIES 🔥
 async function loadComments(slug) {
     console.log("Loading comments for:", slug);
 
@@ -97,26 +98,8 @@ async function loadComments(slug) {
         }
 
         comments.forEach(comment => {
-            const formattedDate = comment.timestamp
-                ? new Date(comment.timestamp).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric"
-                })
-                : "Unknown Date";
-
-            const commentItem = document.createElement("li");
-            commentItem.classList.add("comment", "comment-item");
-            commentItem.innerHTML = `
-                <div class="comment-box">
-                    <img src="/assets/images/avatar.png" class="avatar" alt="">
-                    <div class="comment-box__body">
-                        <h5 class="comment-box__details">${comment.name} <span>${formattedDate}</span></h5>
-                        <p>${comment.comment}</p>
-                    </div>
-                </div>
-            `;
-            commentsContainer.appendChild(commentItem);
+            const commentElement = createCommentElement(comment);
+            commentsContainer.appendChild(commentElement);
         });
 
         console.log("✅ Comments updated successfully");
@@ -124,4 +107,129 @@ async function loadComments(slug) {
     } catch (error) {
         console.error("Error loading comments:", error);
     }
+}
+
+// 🔥 CREATE COMMENT ELEMENT WITH REPLIES 🔥
+function createCommentElement(comment) {
+    const formattedDate = comment.timestamp
+        ? new Date(comment.timestamp).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
+        : "Unknown Date";
+
+    const li = document.createElement("li");
+    li.classList.add("comment", "comment-item");
+    li.setAttribute("data-comment-id", comment._id);
+
+    li.innerHTML = `
+        <div class="comment-box">
+            <img src="/assets/images/avatar.png" class="avatar" alt="">
+            <div class="comment-box__body">
+                <h5 class="comment-box__details">${comment.name} <span>${formattedDate}</span></h5>
+                <p>${comment.comment}</p>
+            </div>
+            <div class="comment-footer">
+                <a class="comment-reply-link" href="#" onclick="showReplyForm('${comment._id}')">Reply</a>
+            </div>
+        </div>
+        <ul class="replies"></ul>
+        <div id="reply-form-${comment._id}" class="reply-form hidden">
+          <form onsubmit="submitReply(event, '${comment._id}')">
+            <input type="hidden" name="parent_id" value="${comment._id}">
+            <div class="group-row">
+              <div class="group">
+                <textarea class="textarea" name="reply_comment" rows="2" placeholder="Reply"></textarea>
+              </div>
+            </div>
+            <div class="group-row">
+              <div class="group">
+                <input type="text" name="reply_name" class="input" placeholder="Name" required>
+              </div>
+              <div class="group">
+                <input type="email" name="reply_email" class="input" placeholder="Email (not shown)" required>
+              </div>
+            </div>
+            <div class="group-row">
+              <div class="group">
+                <button type="submit" class="btn">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+    `;
+
+    if (comment.replies && comment.replies.length > 0) {
+        const repliesContainer = li.querySelector(".replies");
+        comment.replies.forEach(reply => {
+            const replyElement = createReplyElement(reply);
+            repliesContainer.appendChild(replyElement);
+        });
+    }
+
+    return li;
+}
+
+// 🔥 CREATE REPLY ELEMENT 🔥
+function createReplyElement(reply) {
+    const formattedDate = reply.timestamp
+        ? new Date(reply.timestamp).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
+        : "Unknown Date";
+
+    const li = document.createElement("li");
+    li.classList.add("comment", "comment-item", "reply");
+
+    li.innerHTML = `
+        <div class="comment-box">
+            <img src="/assets/images/avatar.png" class="avatar" alt="">
+            <div class="comment-box__body">
+                <h5 class="comment-box__details">${reply.name} <span>${formattedDate}</span></h5>
+                <p>${reply.comment}</p>
+            </div>
+        </div>
+    `;
+
+    return li;
+}
+
+// 🔥 SHOW REPLY FORM 🔥
+function showReplyForm(commentId) {
+    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("hidden"));
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    if (replyForm) {
+        replyForm.classList.remove("hidden");
+    }
+}
+
+// 🔥 SUBMIT REPLY 🔥
+function submitReply(event, commentId) {
+    event.preventDefault();
+
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    const formData = new FormData(replyForm);
+
+    const replyData = {
+        parent_id: commentId,
+        comment: formData.get("reply_comment").trim(),
+        name: formData.get("reply_name").trim(),
+        email: formData.get("reply_email").trim(),
+    };
+
+    if (!replyData.comment || !replyData.name || !replyData.email) {
+        alert("All fields are required!");
+        return;
+    }
+
+    fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments/reply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(replyData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Reply submitted successfully!");
+            loadComments(document.querySelector("[name='options[slug]']").value);
+        } else {
+            alert("Error submitting reply.");
+        }
+    })
+    .catch(error => console.error("Error submitting reply:", error));
 }
