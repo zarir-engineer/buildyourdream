@@ -207,8 +207,13 @@ function showReplyForm(commentId) {
 function submitReply(event, commentId) {
     event.preventDefault();
 
-    const replyForm = document.getElementById(`reply-form-${commentId}`);
-    const formData = new FormData(replyForm);
+    const replyForm = document.querySelector(`#reply-form-${commentId} form`); // Select the actual <form>
+    if (!replyForm) {
+        console.error("Reply form not found!");
+        return;
+    }
+
+    const formData = new FormData(replyForm); // Now works because it's selecting the form
 
     const replyData = {
         parent_id: commentId,
