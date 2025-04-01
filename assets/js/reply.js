@@ -16,11 +16,10 @@ function submitReply(event, commentId) {
   const formData = new FormData(replyForm);
 
   const replyData = {
-    parent_id: formData.get("parent_id"),
+    parent_id: commentId,  // Send as parent_id
     comment: formData.get("reply_comment").trim(),
     name: formData.get("reply_name").trim(),
     email: formData.get("reply_email").trim(),
-    post_id: window.location.pathname.split("/").filter(Boolean).pop(),
   };
 
   if (!replyData.comment || !replyData.name || !replyData.email) {
@@ -28,20 +27,16 @@ function submitReply(event, commentId) {
     return;
   }
 
-  fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments", {
+  fetch("https://jekyll-comments-backend-production-8c02.up.railway.app/comments/reply", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(replyData),
   })
     .then(response => response.json())
     .then(data => {
       if (data.success) {
         alert("Reply submitted successfully!");
-
-        // Hide the form
-        replyForm.style.display = "none";
+        replyForm.style.display = "none"; // Hide the form
 
         // Add reply dynamically
         const parentComment = document.querySelector(`[data-comment-id="${commentId}"]`);
