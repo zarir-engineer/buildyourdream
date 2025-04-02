@@ -235,7 +235,7 @@ function showReplyForm(commentId) {
         } else {
             console.warn("Reply form not found after delay:", replyFormId);
         }
-    }, 200); // Wait 100ms before checking
+    }, 2000); // Wait 100ms before checking
 
     // Debugging
     console.log("+++ getElementById reply-form-commentId ", document.getElementById(replyFormId));
