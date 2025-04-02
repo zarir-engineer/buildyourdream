@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
     const form = document.getElementById("commentForm");
     const messageBox = document.getElementById("commentMessage");
     const popup = document.getElementById("commentPopup");
@@ -191,15 +192,15 @@ function createReplyElement(reply) {
 
 // 🔥 SHOW REPLY FORM 🔥
 function showReplyForm(commentId) {
-    event.preventDefault();  // Stops the page from jumping to the top
+    event.preventDefault(); // Prevents page jump
 
-    // Hide all other reply forms first
+    // Hide all reply forms
     document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
 
     // Show the selected reply form
     const replyForm = document.getElementById(`reply-form-${commentId}`);
     if (replyForm) {
-        replyForm.classList.remove("reply-hidden");
+        replyForm.classList.toggle("reply-hidden"); // Toggle visibility
     }
 }
 
