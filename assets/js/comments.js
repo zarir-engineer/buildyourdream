@@ -100,7 +100,8 @@ async function loadComments(slug) {
         const comments = await response.json();
         console.log("Fetched comments:", comments);
 
-        const commentsContainer = document.querySelector(".comments");
+        const commentsContainer = document.querySelector("#comments-container");
+
         if (!commentsContainer) {
             console.error("Comments container not found!");
             return;
