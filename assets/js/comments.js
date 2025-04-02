@@ -138,7 +138,7 @@ function createCommentElement(comment) {
 
     li.innerHTML = `
         <div class="comment-box">
-            <img src="/assets/images/avatar.png" class="avatar" alt="">
+            <img src="${site.baseurl}/assets/images/avatar.png" class="avatar" alt="">
             <div class="comment-box__body">
                 <h5 class="comment-box__details">${comment.name} <span>${formattedDate}</span></h5>
                 <p>${comment.comment}</p>
@@ -195,7 +195,7 @@ function createReplyElement(reply) {
 
     li.innerHTML = `
         <div class="comment-box">
-            <img src="/assets/images/avatar.png" class="avatar" alt="">
+            <img src="${site.baseurl}/assets/images/avatar.png" class="avatar" alt="">
             <div class="comment-box__body">
                 <h5 class="comment-box__details">${reply.name} <span>${formattedDate}</span></h5>
                 <p>${reply.comment}</p>
