@@ -1,3 +1,14 @@
+function waitForElement(id, callback) {
+  const observer = new MutationObserver((mutations, observer) => {
+    if (document.getElementById(id)) {
+      observer.disconnect();
+      callback(document.getElementById(id));
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 //    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
     const replyTriggers = document.querySelectorAll(".comment-reply-link");
@@ -211,17 +222,19 @@ function showReplyForm(commentId) {
     event.preventDefault(); // Prevents page jump
     console.log("Reply button clicked for comment ID:", commentId);
 
-    // Hide all reply forms
+    // Hide all reply forms first
     document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
-    console.log(`+++ Looking for: reply-form-${commentId}`);
-    console.log("+++ getelementbyid reply-form-commentId ", document.getElementById(`reply-form-${commentId}`));
 
-    // Show the selected reply form
-    const replyForm = document.getElementById(`reply-form-${commentId}`);
-    console.log("+++ replyForm ", replyForm); // Check if it selects the right form
-    if (replyForm) {
-        replyForm.classList.toggle("reply-hidden"); // Toggle visibility
-    }
+    const replyFormId = `reply-form-${commentId}`;
+    console.log(`+++ Looking for: ${replyFormId}`);
+
+    waitForElement(replyFormId, (replyForm) => {
+        console.log("+++ Found dynamically:", replyForm);
+        replyForm.style.display = "block"; // Show reply form when found
+    });
+
+    // Debugging
+    console.log("+++ getElementById reply-form-commentId ", document.getElementById(replyFormId));
 }
 
 // 🔥 SUBMIT REPLY 🔥
