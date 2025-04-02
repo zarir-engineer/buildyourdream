@@ -213,10 +213,12 @@ function showReplyForm(commentId) {
 
     // Hide all reply forms
     document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
+    console.log(`+++ Looking for: reply-form-${commentId}`);
+    console.log("+++ getelementbyid reply-form-commentId ", document.getElementById(`reply-form-${commentId}`));
 
     // Show the selected reply form
     const replyForm = document.getElementById(`reply-form-${commentId}`);
-    console.log(replyForm); // Check if it selects the right form
+    console.log("+++ replyForm ", replyForm); // Check if it selects the right form
     if (replyForm) {
         replyForm.classList.toggle("reply-hidden"); // Toggle visibility
     }
