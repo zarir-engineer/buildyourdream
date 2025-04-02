@@ -11,21 +11,19 @@ function waitForElement(id, callback) {
 
 document.addEventListener("DOMContentLoaded", function () {
 //    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
-    const replyTriggers = document.querySelectorAll(".comment-reply-link");
+    document.querySelectorAll(".reply-button").forEach(button => {
+        button.addEventListener("click", (event) => {
+            const replyFormId = event.target.getAttribute("data-reply-id");
+            const replyForm = document.getElementById(replyFormId);
 
-    replyTriggers.forEach(trigger => {
-      trigger.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent page jump
-
-        const commentId = this.getAttribute("onclick").match(/\('(.+)'\)/)[1]; // Extract comment ID
-        const replyForm = document.getElementById(`reply-form-${commentId}`);
-
-        if (replyForm) {
-          replyForm.classList.toggle("reply-hidden"); // Toggle visibility
-        }
-      });
+            if (replyForm) {
+                // Toggle display state
+                replyForm.style.display = (replyForm.style.display === "none" || !replyForm.style.display)
+                    ? "block"
+                    : "none";
+            }
+        });
     });
-
     const form = document.getElementById("commentForm");
     const messageBox = document.getElementById("commentMessage");
     const popup = document.getElementById("commentPopup");
@@ -218,7 +216,7 @@ function createReplyElement(reply) {
 }
 
 // 🔥 SHOW REPLY FORM 🔥
-function showReplyForm(commentId) {
+function showReplyForm(event, commentId) {
     event.preventDefault(); // Prevent page jump
     console.log("Reply button clicked for comment ID:", commentId);
 
@@ -237,30 +235,21 @@ function showReplyForm(commentId) {
         replyForm.style.display = "block"; // Show reply form when found
     });
 
-    // Debugging: Check existing reply forms in DOM
-    document.querySelectorAll(".reply-form").forEach(form => console.log("Found form ID:", form.id));
-
-    // Alternative check (if IDs don’t match)
-    const alternativeReplyForm = document.querySelector(`.reply-form[data-comment-id="${commentId}"]`);
-    if (alternativeReplyForm) {
-        console.log("Using alternative selection:", alternativeReplyForm);
-        alternativeReplyForm.style.display = "block";
-    }
-
     console.log("+++ getElementById reply-form-commentId ", document.getElementById(replyFormId));
 }
 
 // 🔥 SUBMIT REPLY 🔥
+// 🔥 SUBMIT REPLY 🔥
 function submitReply(event, commentId) {
     event.preventDefault();
 
-    const replyFormForm = replyForm ? replyForm.querySelector("form") : null;
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
     if (!replyForm) {
         console.error("Reply form not found!");
         return;
     }
 
-    const formData = new FormData(replyForm); // Now works because it's selecting the form
+    const formData = new FormData(replyForm.querySelector("form")); // Get form inside replyForm
 
     const replyData = {
         parent_id: commentId,
