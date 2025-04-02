@@ -228,10 +228,14 @@ function showReplyForm(commentId) {
     const replyFormId = `reply-form-${commentId}`;
     console.log(`+++ Looking for: ${replyFormId}`);
 
-    waitForElement(replyFormId, (replyForm) => {
-        console.log("+++ Found dynamically:", replyForm);
-        replyForm.style.display = "block"; // Show reply form when found
-    });
+    setTimeout(() => {
+        const replyForm = document.getElementById(replyFormId);
+        if (replyForm) {
+            replyForm.style.display = "block";
+        } else {
+            console.warn("Reply form not found after delay:", replyFormId);
+        }
+    }, 200); // Wait 100ms before checking
 
     // Debugging
     console.log("+++ getElementById reply-form-commentId ", document.getElementById(replyFormId));
