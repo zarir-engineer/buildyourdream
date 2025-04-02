@@ -1,5 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
+//    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
+    const replyTriggers = document.querySelectorAll(".comment-reply-link");
+
+    replyTriggers.forEach(trigger => {
+      trigger.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent page jump
+
+        const commentId = this.getAttribute("onclick").match(/\('(.+)'\)/)[1]; // Extract comment ID
+        const replyForm = document.getElementById(`reply-form-${commentId}`);
+
+        if (replyForm) {
+          replyForm.classList.toggle("reply-hidden"); // Toggle visibility
+        }
+      });
+    });
+
     const form = document.getElementById("commentForm");
     const messageBox = document.getElementById("commentMessage");
     const popup = document.getElementById("commentPopup");
@@ -132,7 +147,7 @@ function createCommentElement(comment) {
             </div>
         </div>
         <ul class="replies"></ul>
-        <div id="reply-form-{{ comment.id }}" class="reply-form reply-hidden">
+        <div id="reply-form-{{ comment.id }}" class="reply-form reply-hidden" style="display: none;">
           <form onsubmit="submitReply(event, '${comment._id}')">
             <input type="hidden" name="parent_id" value="${comment._id}">
             <div class="group-row">
@@ -193,12 +208,14 @@ function createReplyElement(reply) {
 // 🔥 SHOW REPLY FORM 🔥
 function showReplyForm(commentId) {
     event.preventDefault(); // Prevents page jump
+    console.log("Reply button clicked for comment ID:", commentId);
 
     // Hide all reply forms
     document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
 
     // Show the selected reply form
-    const replyForm = document.getElementById("reply-form-" + commentId);
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    console.log(replyForm); // Check if it selects the right form
     if (replyForm) {
         replyForm.classList.toggle("reply-hidden"); // Toggle visibility
     }
