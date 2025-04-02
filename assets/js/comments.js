@@ -159,7 +159,7 @@ function createCommentElement(comment) {
             </div>
         </div>
         <ul class="replies"></ul>
-        <div id="reply-form-{{ comment._id }}" class="reply-form reply-hidden" style="display: none;">
+        <div id="reply-form-${comment._id}" class="reply-form reply-hidden" style="display: none;">
           <form onsubmit="submitReply(event, '${comment._id}')">
             <input type="hidden" name="parent_id" value="${comment._id}">
             <div class="group-row">
