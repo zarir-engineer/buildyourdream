@@ -159,5 +159,6 @@ layout: base
 </div>
 
 {% if page.comments %}
+  <script>var SITE_BASEURL = "{{ site.baseurl }}";</script>
   <script src="{{ '/assets/js/comments.js' | relative_url }}" defer></script>
 {% endif %}
