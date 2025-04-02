@@ -132,7 +132,7 @@ function createCommentElement(comment) {
             </div>
         </div>
         <ul class="replies"></ul>
-        <div id="reply-form-${comment._id}" class="reply-form hidden">
+        <div id="reply-form-{{ comment.id }}" class="reply-form reply-hidden">
           <form onsubmit="submitReply(event, '${comment._id}')">
             <input type="hidden" name="parent_id" value="${comment._id}">
             <div class="group-row">
@@ -198,7 +198,7 @@ function showReplyForm(commentId) {
     document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
 
     // Show the selected reply form
-    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    const replyForm = document.getElementById("reply-form-" + commentId);
     if (replyForm) {
         replyForm.classList.toggle("reply-hidden"); // Toggle visibility
     }
@@ -208,7 +208,7 @@ function showReplyForm(commentId) {
 function submitReply(event, commentId) {
     event.preventDefault();
 
-    const replyForm = document.querySelector(`#reply-form-${commentId} form`); // Select the actual <form>
+    const replyFormForm = replyForm ? replyForm.querySelector("form") : null;
     if (!replyForm) {
         console.error("Reply form not found!");
         return;
