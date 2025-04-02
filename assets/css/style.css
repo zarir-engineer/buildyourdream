@@ -58,6 +58,9 @@ Version: 1.0
   border-radius: 5px;
 }
 
+.reply-form {
+    display: none; /* Ensure it's hidden */
+}
 
 /* hide reply form */
 div.reply-form.reply-hidden {
