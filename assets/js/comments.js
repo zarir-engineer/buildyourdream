@@ -219,7 +219,7 @@ function createReplyElement(reply) {
 
 // 🔥 SHOW REPLY FORM 🔥
 function showReplyForm(commentId) {
-    event.preventDefault(); // Prevents page jump
+    event.preventDefault(); // Prevent page jump
     console.log("Reply button clicked for comment ID:", commentId);
 
     // Hide all reply forms first
@@ -228,16 +228,25 @@ function showReplyForm(commentId) {
     const replyFormId = `reply-form-${commentId}`;
     console.log(`+++ Looking for: ${replyFormId}`);
 
-    setTimeout(() => {
-        const replyForm = document.getElementById(replyFormId);
-        if (replyForm) {
-            replyForm.style.display = "block";
-        } else {
-            console.warn("Reply form not found after delay:", replyFormId);
+    waitForElement(replyFormId, (replyForm) => {
+        if (!replyForm) {
+            console.error("Reply form not found with ID:", replyFormId);
+            return;
         }
-    }, 2000); // Wait 100ms before checking
+        console.log("+++ Found dynamically:", replyForm);
+        replyForm.style.display = "block"; // Show reply form when found
+    });
 
-    // Debugging
+    // Debugging: Check existing reply forms in DOM
+    document.querySelectorAll(".reply-form").forEach(form => console.log("Found form ID:", form.id));
+
+    // Alternative check (if IDs don’t match)
+    const alternativeReplyForm = document.querySelector(`.reply-form[data-comment-id="${commentId}"]`);
+    if (alternativeReplyForm) {
+        console.log("Using alternative selection:", alternativeReplyForm);
+        alternativeReplyForm.style.display = "block";
+    }
+
     console.log("+++ getElementById reply-form-commentId ", document.getElementById(replyFormId));
 }
 
