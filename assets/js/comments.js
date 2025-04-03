@@ -10,7 +10,6 @@ function waitForElement(id, callback) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-//    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
     document.querySelectorAll(".reply-button").forEach(button => {
         button.addEventListener("click", (event) => {
             const replyFormId = event.target.getAttribute("data-reply-id");
@@ -159,7 +158,7 @@ function createCommentElement(comment) {
             </div>
         </div>
         <ul class="replies"></ul>
-        <div id="reply-form-${comment._id}" class="reply-form reply-hidden" style="display: none;">
+        <div id="reply-box-${comment._id}" class="reply-box reply-hidden" style="display: none;">
           <form onsubmit="submitReply(event, '${comment._id}')">
             <input type="hidden" name="parent_id" value="${comment._id}">
             <div class="group-row">
@@ -255,7 +254,6 @@ function showReplyForm(event, commentId) {
   }
 }
 // 🔥 SUBMIT REPLY 🔥
-// 🔥 SUBMIT REPLY 🔥
 function submitReply(event, commentId) {
     event.preventDefault();
     let replyBox = document.getElementById(`reply-box-${commentId}`);
@@ -263,7 +261,7 @@ function submitReply(event, commentId) {
         console.error("Reply box not found!");
         return;
     }
-    const formData = new FormData(replyForm.querySelector("form")); // Get form inside replyForm
+    const formData = new FormData(replyBox.querySelector("form")); // Get form inside replyForm
 
     const replyData = {
         parent_id: commentId,

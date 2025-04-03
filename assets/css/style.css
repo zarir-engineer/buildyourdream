@@ -58,12 +58,12 @@ Version: 1.0
   border-radius: 5px;
 }
 
-.reply-form {
+.reply-box {
     display: none; /* Ensure it's hidden */
 }
 
 /* hide reply form */
-div.reply-form.reply-hidden {
+div.reply-box.reply-hidden {
   display: none !important;
 }
 
