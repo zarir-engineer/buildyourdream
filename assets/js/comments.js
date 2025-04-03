@@ -153,7 +153,6 @@ function createCommentElement(comment) {
                 <p>${comment.comment}</p>
             </div>
             <div id="comment-{{ comment._id }}" class="comment">
-              <p>{{ comment.text }}</p>
               <div class="comment-footer">
                 <a class="comment-reply-link" href="#" onclick="showReplyForm(event, '{{ comment._id }}')">Reply</a>
               </div>
@@ -243,7 +242,7 @@ function showReplyForm(event, commentId) {
       replyBox.className = "reply-box";
       replyBox.innerHTML = `
         <textarea class="textarea" placeholder="Write your reply..." rows="3"></textarea>
-        <button class="btn" onclick="submitReply('${commentId}')">Submit Reply</button>
+        <button class="btn" onclick="submitReply(event, '${commentId}')">Submit Reply</button>
         <button class="btn btn-secondary" onclick="hideReplyForm('${commentId}')">Cancel</button>
       `;
 
