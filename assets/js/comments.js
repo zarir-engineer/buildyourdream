@@ -152,8 +152,11 @@ function createCommentElement(comment) {
                 <h5 class="comment-box__details">${comment.name} <span>${formattedDate}</span></h5>
                 <p>${comment.comment}</p>
             </div>
-            <div class="comment-footer">
-                <a class="comment-reply-link" href="#" onclick="showReplyForm('${comment._id}')">Reply</a>
+            <div id="comment-{{ comment._id }}" class="comment">
+              <p>{{ comment.text }}</p>
+              <div class="comment-footer">
+                <a class="comment-reply-link" href="#" onclick="showReplyForm(event, '{{ comment._id }}')">Reply</a>
+              </div>
             </div>
         </div>
         <ul class="replies"></ul>
@@ -193,6 +196,14 @@ function createCommentElement(comment) {
     return li;
 }
 
+// 🔥 HIDE REPLY ELEMENT 🔥
+function hideReplyForm(commentId) {
+  let replyBox = document.getElementById(`reply-box-${commentId}`);
+  if (replyBox) {
+    replyBox.style.display = "none";
+  }
+}
+
 // 🔥 CREATE REPLY ELEMENT 🔥
 function createReplyElement(reply) {
     const formattedDate = reply.timestamp
@@ -217,27 +228,33 @@ function createReplyElement(reply) {
 
 // 🔥 SHOW REPLY FORM 🔥
 function showReplyForm(event, commentId) {
-    event.preventDefault(); // Prevent page jump
-    console.log("Reply button clicked for comment ID:", commentId);
+  event.preventDefault();  // Prevents page reload
 
-    // Hide all reply forms first
-    document.querySelectorAll(".reply-form").forEach(form => form.classList.add("reply-hidden"));
+  let commentElement = document.getElementById(`comment-${commentId}`);
 
-    const replyFormId = `reply-form-${commentId}`;
-    console.log(`+++ Looking for: ${replyFormId}`);
+  // If comment element exists, check if a reply box is already there
+  if (commentElement) {
+    let existingReplyBox = document.getElementById(`reply-box-${commentId}`);
 
-    waitForElement(replyFormId, (replyForm) => {
-        if (!replyForm) {
-            console.error("Reply form not found with ID:", replyFormId);
-            return;
-        }
-        console.log("+++ Found dynamically:", replyForm);
-        replyForm.style.display = "block"; // Show reply form when found
-    });
+    if (!existingReplyBox) {
+      // Create a reply box
+      let replyBox = document.createElement("div");
+      replyBox.id = `reply-box-${commentId}`;
+      replyBox.className = "reply-box";
+      replyBox.innerHTML = `
+        <textarea class="textarea" placeholder="Write your reply..." rows="3"></textarea>
+        <button class="btn" onclick="submitReply('${commentId}')">Submit Reply</button>
+        <button class="btn btn-secondary" onclick="hideReplyForm('${commentId}')">Cancel</button>
+      `;
 
-    console.log("+++ getElementById reply-form-commentId ", document.getElementById(replyFormId));
+      // Append to the comment section
+      commentElement.appendChild(replyBox);
+    } else {
+      // If the reply box is already there, just show it
+      existingReplyBox.style.display = "block";
+    }
+  }
 }
-
 // 🔥 SUBMIT REPLY 🔥
 // 🔥 SUBMIT REPLY 🔥
 function submitReply(event, commentId) {
