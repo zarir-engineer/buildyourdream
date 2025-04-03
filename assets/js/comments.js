@@ -258,13 +258,11 @@ function showReplyForm(event, commentId) {
 // 🔥 SUBMIT REPLY 🔥
 function submitReply(event, commentId) {
     event.preventDefault();
-
-    const replyForm = document.getElementById(`reply-form-${commentId}`);
-    if (!replyForm) {
-        console.error("Reply form not found!");
+    let replyBox = document.getElementById(`reply-box-${commentId}`);
+    if (!replyBox) {
+        console.error("Reply box not found!");
         return;
     }
-
     const formData = new FormData(replyForm.querySelector("form")); // Get form inside replyForm
 
     const replyData = {
