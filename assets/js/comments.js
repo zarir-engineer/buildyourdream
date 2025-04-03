@@ -261,7 +261,7 @@ function submitReply(event, commentId) {
         console.error("Reply box not found!");
         return;
     }
-    const formData = new FormData(replyBox.querySelector("form")); // Get form inside replyForm
+    const formData = new FormData(replyBox.querySelector("commentForm")); // Get form inside replyForm
 
     const replyData = {
         parent_id: commentId,
