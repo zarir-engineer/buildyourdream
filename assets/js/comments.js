@@ -1,16 +1,5 @@
-function waitForElement(id, callback) {
-  const observer = new MutationObserver((mutations, observer) => {
-    if (document.getElementById(id)) {
-      observer.disconnect();
-      callback(document.getElementById(id));
-    }
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
-}
-
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".reply-button").forEach(button => {
+    document.querySelectorAll(".comment-reply-link").forEach(button => {
         button.addEventListener("click", (event) => {
             const replyFormId = event.target.getAttribute("data-reply-id");
             const replyForm = document.getElementById(replyFormId);
@@ -253,6 +242,7 @@ function showReplyForm(event, commentId) {
     }
   }
 }
+
 // 🔥 SUBMIT REPLY 🔥
 function submitReply(event, commentId) {
     event.preventDefault();
