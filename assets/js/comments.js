@@ -253,7 +253,7 @@ function submitReply(event, commentId) {
         return;
     }
 
-    const form = replyBox.querySelector(".commentForm");
+    const form = replyBox.querySelector("form");
     if (!form) {
         console.error("Reply form not found!");
         return;
