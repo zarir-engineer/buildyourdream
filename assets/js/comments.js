@@ -215,31 +215,51 @@ function createReplyElement(reply) {
 
 // 🔥 SHOW REPLY FORM 🔥
 function showReplyForm(event, commentId) {
-  event.preventDefault();  // Prevents page reload
+  event.preventDefault();
 
-  let commentElement = document.getElementById(`comment-${commentId}`);
+  const commentElement = document.querySelector(`[data-comment-id="${commentId}"]`);
 
-  // If comment element exists, check if a reply box is already there
-  if (commentElement) {
-    let existingReplyBox = document.getElementById(`reply-box-${commentId}`);
+  if (!commentElement) {
+    console.error(`Comment element not found for ID: ${commentId}`);
+    return;
+  }
 
-    if (!existingReplyBox) {
-      // Create a reply box
-      let replyBox = document.createElement("div");
-      replyBox.id = `reply-box-${commentId}`;
-      replyBox.className = "reply-box";
-      replyBox.innerHTML = `
-        <textarea class="textarea" placeholder="Write your reply..." rows="3"></textarea>
-        <button class="btn" onclick="submitReply(event, '${commentId}')">Submit Reply</button>
-        <button class="btn btn-secondary" onclick="hideReplyForm('${commentId}')">Cancel</button>
-      `;
+  let existingReplyBox = document.getElementById(`reply-box-${commentId}`);
 
-      // Append to the comment section
-      commentElement.appendChild(replyBox);
-    } else {
-      // If the reply box is already there, just show it
-      existingReplyBox.style.display = "block";
-    }
+  if (!existingReplyBox) {
+    // Create reply form dynamically (cleaner structure)
+    const replyBox = document.createElement("div");
+    replyBox.id = `reply-box-${commentId}`;
+    replyBox.className = "reply-box";
+
+    replyBox.innerHTML = `
+      <form onsubmit="submitReply(event, '${commentId}')">
+        <input type="hidden" name="parent_id" value="${commentId}">
+        <div class="group-row">
+          <div class="group">
+            <textarea class="textarea" name="reply_comment" rows="2" placeholder="Reply"></textarea>
+          </div>
+        </div>
+        <div class="group-row">
+          <div class="group">
+            <input type="text" name="reply_name" class="input" placeholder="Name" required>
+          </div>
+          <div class="group">
+            <input type="email" name="reply_email" class="input" placeholder="Email (not shown)" required>
+          </div>
+        </div>
+        <div class="group-row">
+          <div class="group">
+            <button type="submit" class="btn">Submit</button>
+            <button type="button" class="btn btn-secondary" onclick="hideReplyForm('${commentId}')">Cancel</button>
+          </div>
+        </div>
+      </form>
+    `;
+
+    commentElement.appendChild(replyBox);
+  } else {
+    existingReplyBox.style.display = "block";
   }
 }
 
@@ -255,7 +275,7 @@ function submitReply(event, commentId) {
 
     const form = replyBox.querySelector("form");
     if (!form) {
-        console.error("Reply form not found!");
+        console.error("Reply <form> not found in replyBox!");
         return;
     }
 
