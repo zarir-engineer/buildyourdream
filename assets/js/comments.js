@@ -246,18 +246,26 @@ function showReplyForm(event, commentId) {
 // 🔥 SUBMIT REPLY 🔥
 function submitReply(event, commentId) {
     event.preventDefault();
-    let replyBox = document.getElementById(`reply-box-${commentId}`);
+
+    const replyBox = document.getElementById(`reply-box-${commentId}`);
     if (!replyBox) {
         console.error("Reply box not found!");
         return;
     }
-    const formData = new FormData(replyBox.querySelector("commentForm")); // Get form inside replyForm
+
+    const form = replyBox.querySelector(".commentForm");
+    if (!form) {
+        console.error("Reply form not found!");
+        return;
+    }
+
+    const formData = new FormData(form);
 
     const replyData = {
         parent_id: commentId,
-        comment: formData.get("reply_comment").trim(),
-        name: formData.get("reply_name").trim(),
-        email: formData.get("reply_email").trim(),
+        comment: (formData.get("reply_comment") || "").trim(),
+        name: (formData.get("reply_name") || "").trim(),
+        email: (formData.get("reply_email") || "").trim(),
     };
 
     if (!replyData.comment || !replyData.name || !replyData.email) {
