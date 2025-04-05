@@ -142,13 +142,13 @@ function createCommentElement(comment) {
             </div>
             <div id="comment-{{ comment._id }}" class="comment">
               <div class="comment-footer">
-                <a class="comment-reply-link" href="#" onclick="showReplyForm(event, '{{ comment._id }}')">Reply</a>
+                <a class="comment-reply-link" href="#" onclick="showReplyForm('{{ comment._id }}', event)">Reply</a>
               </div>
             </div>
         </div>
         <ul class="replies"></ul>
         <div id="reply-box-${comment._id}" class="reply-box reply-hidden" style="display: none;">
-          <form onsubmit="submitReply(event, '${comment._id}')">
+          <form onsubmit="submitReply('${comment._id}', event)">
             <input type="hidden" name="parent_id" value="${comment._id}">
             <div class="group-row">
               <div class="group">
@@ -184,7 +184,7 @@ function createCommentElement(comment) {
 }
 
 // 🔥 HIDE REPLY ELEMENT 🔥
-function hideReplyForm(commentId) {
+window.hideReplyForm = function(commentId) {
   let replyBox = document.getElementById(`reply-box-${commentId}`);
   if (replyBox) {
     replyBox.style.display = "none";
@@ -214,9 +214,9 @@ function createReplyElement(reply) {
 }
 
 // 🔥 SHOW REPLY FORM 🔥
-function showReplyForm(event, commentId) {
+//function showReplyForm(event, commentId) {
+window.showReplyForm = function(commentId, event) {
   event.preventDefault();
-
   const commentElement = document.querySelector(`[data-comment-id="${commentId}"]`);
 
   if (!commentElement) {
@@ -233,7 +233,7 @@ function showReplyForm(event, commentId) {
     replyBox.className = "reply-box";
 
     replyBox.innerHTML = `
-      <form onsubmit="submitReply(event, '${commentId}')">
+      <form onsubmit="submitReply('${commentId}', event)">
         <input type="hidden" name="parent_id" value="${commentId}">
         <div class="group-row">
           <div class="group">
@@ -264,7 +264,7 @@ function showReplyForm(event, commentId) {
 }
 
 // 🔥 SUBMIT REPLY 🔥
-function submitReply(event, commentId) {
+window.submitReply = function(commentId, event) {
     event.preventDefault();
 
     const replyBox = document.getElementById(`reply-box-${commentId}`);
