@@ -142,7 +142,7 @@ function createCommentElement(comment) {
             </div>
             <div id="comment-{{ comment._id }}" class="comment">
               <div class="comment-footer">
-                <a class="comment-reply-link" href="#" onclick="showReplyForm('{{ comment._id }}', event)">Reply</a>
+                <a class="comment-reply-link" href="javascript:void(0);" data-id="${comment._id}" onclick="showReplyForm('{{ comment._id }}', event)">Reply</a>
               </div>
             </div>
         </div>
