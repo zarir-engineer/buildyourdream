@@ -148,7 +148,7 @@ function createCommentElement(comment) {
         </div>
         <ul class="replies"></ul>
         <div id="reply-box-${comment._id}" class="reply-box reply-hidden" style="display: none;">
-          <form onsubmit="submitReply('${comment._id}', event)">
+          <form onsubmit="submitReply(event, '${comment._id}')">
             <input type="hidden" name="parent_id" value="${comment._id}">
             <div class="group-row">
               <div class="group">
@@ -233,7 +233,7 @@ window.showReplyForm = function(commentId, event) {
     replyBox.className = "reply-box";
 
     replyBox.innerHTML = `
-      <form onsubmit="submitReply('${commentId}', event)">
+      <form onsubmit="submitReply(event, '${commentId}')">
         <input type="hidden" name="parent_id" value="${commentId}">
         <div class="group-row">
           <div class="group">
@@ -264,7 +264,7 @@ window.showReplyForm = function(commentId, event) {
 }
 
 // 🔥 SUBMIT REPLY 🔥
-window.submitReply = function(commentId, event) {
+window.submitReply = function(event, commentId) {
     event.preventDefault();
 
     const replyBox = document.getElementById(`reply-box-${commentId}`);
