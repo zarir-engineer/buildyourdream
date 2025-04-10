@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("✅ DOM is fully loaded");
   const commentForm = document.getElementById("comment-form");
+  console.log("📝 Found comment form:", commentForm);
+
   const commentsContainer = document.getElementById("comments-container");
   const slug = window.location.pathname.split("/").filter(Boolean).join("-") + "-slug";
 
@@ -65,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Reply form
   function showReplyForm(parentId, container) {
+    console.log("📥 showReplyForm triggered for ID:", parentId);
     const existingForm = container.querySelector(".reply-form");
     if (existingForm) return;
 
@@ -100,25 +104,28 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Submit comment
-  commentForm.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const name = commentForm.elements["name"].value.trim();
-    const comment = commentForm.elements["comment"].value.trim();
+  if (commentForm) {
+    commentForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const name = commentForm.elements["name"].value.trim();
+      const comment = commentForm.elements["comment"].value.trim();
 
-    if (!name || !comment) return;
+      if (!name || !comment) return;
 
-    try {
-      await fetch(`${API_URL}/comments`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, comment, slug }),
-      });
-      commentForm.reset();
-      loadComments();
-    } catch (err) {
-      console.error("Failed to post comment:", err);
-    }
-  });
+      try {
+        await fetch(`${API_URL}/comments`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, comment, slug }),
+        });
+        commentForm.reset();
+        loadComments();
+      } catch (err) {
+        console.error("Failed to post comment:", err);
+      }
+    });
+  }
+  loadComments();
 
   // Submit reply
   async function postReply(parent_id, name, comment) {
