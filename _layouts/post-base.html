@@ -50,18 +50,14 @@ layout: base
                   </div>
               </div>
 
+
               <!-- Comments Section -->
               <div class="comments-post scrolla-element-anim-1 scroll-animate" data-animate="active">
                 <div class="section__comments" id="comments-container">
                   <!-- Comment Count -->
                   <div class="m-titles">
                     <div class="m-title align-left">
-                      {% assign comments = site.data.comments[page.slug] %}
-                      {% if comments %}
-                        {{ comments | size }} Comments
-                      {% else %}
-                        No Comments Yet
-                      {% endif %}
+                      <div id="comment-count">Loading comments...</div>
                     </div>
                   </div>
                   {% if comments %}
@@ -84,12 +80,12 @@ layout: base
                   {% endif %}
 
                   <!-- Comment  Form -->
-                  <div class="form-comment">
+                  <div class="form-comment" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: relative; z-index: 9999; border: 2px solid red;">
                     <div class="comment-respond">
                       <div class="m-titles">
                         <div class="m-title align-left">Leave a comment</div>
                       </div>
-                      <form id="commentForm">
+                      <form id="comment-form">
                         <input type="hidden" name="options[slug]" value="{{ page.slug }}">
                         <input type="hidden" name="fields[date]" value="{{ 'now' | date: '%Y-%m-%d' }}">
 
