@@ -133,6 +133,7 @@ DEPENDENCIES
   jekyll-sitemap
   jemoji
   kramdown-parser-gfm
+  webrick
 
 BUNDLED WITH
    2.5.23

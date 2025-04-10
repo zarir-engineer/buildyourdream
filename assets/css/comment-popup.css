@@ -35,3 +35,49 @@
     border: none;
     cursor: pointer;
 }
+
+.comments-post,
+.section__comments {
+  min-height: 400px;
+  overflow: visible !important;
+  display: block !important;
+}
+
+.comments-post {
+	margin-top: 100px;
+}
+
+.comments-post .m-titles {
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.comments-post .m-title small {
+	margin-left: 10px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.comments-post .m-title small a {
+	text-decoration: none;
+}
+
+.comments-post .m-title small a:hover {
+	text-decoration: underline;
+}
+
+	.comments-post {
+		margin-top: 60px;
+	}
+	.comment-box__details {
+		font-size: 20px;
+	}
+	.comment-box__body {
+		padding-left: 60px;
+	}
+	.comment-reply-link {
+		font-size: 16px;
+	}
+	.comments .comment {
+		margin: 35px 0;
+	}
