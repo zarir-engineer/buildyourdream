@@ -280,7 +280,6 @@
               <div class="description">
                   <div class="post-content scrolla-element-anim-1 scroll-animate" data-animate="active">
                       <p class="lead">Key Infrastructure Developments in Mumbai</p>
-<!--                        #TODO take format from post as it is check if it exists and add-->
                       <p>The Impact of New Infrastructure Developments on Mumbai’s Real Estate Market</p>
   <!-- This renders the actual Markdown content -->
                       
@@ -297,21 +296,19 @@
                       
                   </div>
               </div>
-
-
               <!-- Comments Section -->
               <div class="comments-post scrolla-element-anim-1 scroll-animate" data-animate="active">
                 <div class="section__comments" id="comments-container">
-
+                  <div id="comments-list"></div>
                   <!-- Comment  Form -->
-                  <div class="form-comment" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: relative; z-index: 9999; border: 2px solid red;">
+                  <div class="form-comment">
                     <div class="comment-respond">
                       <div class="m-titles">
                         <div class="m-title align-left">Leave a comment</div>
                       </div>
                       <form id="comment-form">
                         <input type="hidden" name="options[slug]" value="2025-02-12-impact-of-new-infrastructure-slug">
-                        <input type="hidden" name="fields[date]" value="2025-04-10">
+                        <input type="hidden" name="fields[date]" value="2025-04-11">
 
                         <div class="group-row">
                           <div class="group">
@@ -336,24 +333,9 @@
                       </form>
                     </div>
                   </div>
-                  <!-- Popup for Comment Submission Message -->
-                  <div id="commentPopup" class="modal">
-                    <div class="modal-content">
-                      <p id="commentMessage"></p>
-                      <button onclick="closePopup()">OK</button>
-                    </div>
-                  </div>
-
-                  <!-- Comment Count -->
-                  <div class="m-titles">
-                    <div class="m-title align-left">
-                      <div id="comment-count">Loading comments...</div>
-                    </div>
-                  </div>
-                  
-
                 </div>
               </div>
+
 
           </div>
       </div>
@@ -444,6 +426,8 @@
     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" ></script>
     
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" ></script>
+    
 
 
 
@@ -480,7 +464,7 @@
     <div id="popup-content">
         <div class="services-item">
             <div class="lui-subtitle">
-                <span id="popup-title">Buying</span> <!-- This will be dynamically updated -->
+                <span id="popup-title"></span> <!-- This will be dynamically updated -->
             </div>
             <div class="lui-text">
                 <div>
