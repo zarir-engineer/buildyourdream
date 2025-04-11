@@ -3,7 +3,9 @@
     title="Learn more about After Sales Services"
     data-keyword="After Sales"
     data-description="We want to give you good after sales service."
-    data-image="assets/images/after-sales.png">
+    data-image="assets/images/after-sales.png"
+    data-mdfile="assets/md/after-sales.md">
+
 
     <div class="services-item">
         <div class="lui-subtitle">
@@ -16,18 +18,17 @@
     </div>
 </a>
 
-<!-- Structured Data for SEO -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "After Sales Support",
-  "description": "We provide high-quality after-sales services to ensure customer satisfaction.",
-  "image": "assets/images/after-sales.png",
-  "provider": {
-    "@type": "Organization",
-    "name": "YourCompanyName",
-    "url": "https://yourwebsite.com"
-  }
-}
-</script>
+
+<div id="popup-content" class="modal">
+    <div class="modal-inner">
+        <div id="popup-image" class="modal-image"></div>
+        <h2 id="popup-title" class="text-2xl font-bold"></h2>
+        <p id="popup-description" class="text-base text-gray-600 mt-2"></p>
+
+        <!-- Markdown content goes here -->
+        <div id="popup-mdtext" class="text-lg leading-relaxed mt-4"></div>
+
+        <button onclick="closePopup()" class="mt-4">Close</button>
+    </div>
+</div>
+<div id="overlay" onclick="closePopup()"></div>

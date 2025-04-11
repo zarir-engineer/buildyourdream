@@ -20,19 +20,16 @@
     text-align: center;
 }
 
-
-/* Overlay (optional for dimming background) */
 #overlay {
-    display: none;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999999;
-    backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999998;
+  display: none;
+  backdrop-filter: blur(10px);
 }
 
 /* Close button */
@@ -47,16 +44,16 @@
 
 /* Modal background */
 .modal {
-  overflow-y: auto;
-  max-height: 90vh; /* Prevents overflow outside viewport */
-  display: none; /* Hidden by default */
   position: fixed;
-  z-index: 9999 !important; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100vw; /* Full viewport width */
-  /*height: 100vh;  Full viewport height */
-  background-color: rgba(0, 0, 0, 0.5);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: none;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.5s;
 }
 
