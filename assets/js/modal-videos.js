@@ -39,27 +39,33 @@ function openPopup(element) {
         fetch(mdfile)
             .then(res => res.text())
             .then(md => {
-                mdContainer.innerHTML = marked.parse(md);
+                mdContainer.innerHTML = marked.parse(md);  // Using marked.js for markdown parsing
             })
             .catch(err => {
                 mdContainer.innerHTML = "<p style='color:red;'>Could not load content.</p>";
                 console.error("Markdown load error:", err);
             });
     } else {
-        mdContainer.innerHTML = "";
+        mdContainer.innerHTML = "";  // Clear markdown content if none provided
     }
 
-    // Show modal
+    // Show the modal and overlay with a solid black background
     document.getElementById("popup-content").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
+    document.getElementById("overlay").style.display = "block";  // Full opaque overlay
+
+    // Lock body scroll and prevent interaction with the background content
     document.body.classList.add("modal-open");
+
+    // Optionally, disable background elements (e.g., images) if needed
+    document.querySelectorAll(".background-element").forEach(el => el.style.display = "none");
 }
 
 function closePopup() {
+    // Hide the modal and overlay
     document.getElementById("popup-content").style.display = "none";
     document.getElementById("overlay").style.display = "none";
-    document.body.classList.remove("modal-open"); // Re-enable scrolling
-    // Enable scrolling
+
+    // Re-enable scrolling and interaction with the background content
     document.body.classList.remove("modal-open");
     document.querySelectorAll(".background-element").forEach(el => el.style.display = "block");
 }
