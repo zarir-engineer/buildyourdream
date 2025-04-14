@@ -9,113 +9,90 @@ function enableHorizontalScroll() {
     document.documentElement.style.overflowX = "";
 }
 
-function parseMarkdown(mdText) {
-    return mdText
-        .replace(/^# (.*$)/gim, '<h1 class="text-4xl font-bold mb-4">$1</h1>')
-        .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-semibold mb-3">$1</h2>')
-        .replace(/^### (.*$)/gim, '<h3 class="text-xl font-medium mb-2">$1</h3>')
-        .replace(/\n/gim, '<br/>');
-}
-
 
 // Services
 
 function openPopup(element) {
-    const keyword = element.getAttribute("data-keyword");
-    const description = element.getAttribute("data-description");
-    const image = element.getAttribute("data-image");
-    const mdfile = element.getAttribute("data-mdfile");
+    var keyword = element.getAttribute("data-keyword"); // Get the service name
+    var description = element.getAttribute("data-description"); // Get description (optional)
+    var image = element.getAttribute("data-image"); // Get image URL (optional)
 
-    // Update static content
+    // Update modal content
     document.getElementById("popup-title").innerText = keyword;
     document.getElementById("popup-description").innerText = description || "More details coming soon...";
+
+    // Update image if provided
     if (image) {
         document.getElementById("popup-image").style.backgroundImage = "url(" + image + ")";
     }
 
-    // Load and render Markdown if available
-    const mdContainer = document.getElementById("popup-mdtext");
-    if (mdfile) {
-        fetch(mdfile)
-            .then(res => res.text())
-            .then(md => {
-                mdContainer.innerHTML = marked.parse(md);  // Using marked.js for markdown parsing
-            })
-            .catch(err => {
-                mdContainer.innerHTML = "<p style='color:red;'>Could not load content.</p>";
-                console.error("Markdown load error:", err);
-            });
-    } else {
-        mdContainer.innerHTML = "";  // Clear markdown content if none provided
-    }
-
-    // Show the modal and overlay with a solid black background
+    // Show modal
     document.getElementById("popup-content").style.display = "block";
-    document.getElementById("overlay").style.display = "block";  // Full opaque overlay
-
-    // Lock body scroll and prevent interaction with the background content
+    document.getElementById("overlay").style.display = "block";
+    document.body.classList.add("modal-open"); // Prevents background scrolling
+   // Disable scrolling
     document.body.classList.add("modal-open");
-
-    // Optionally, disable background elements (e.g., images) if needed
     document.querySelectorAll(".background-element").forEach(el => el.style.display = "none");
 }
 
 function closePopup() {
-    // Hide the modal and overlay
     document.getElementById("popup-content").style.display = "none";
     document.getElementById("overlay").style.display = "none";
-
-    // Re-enable scrolling and interaction with the background content
+    document.body.classList.remove("modal-open"); // Re-enable scrolling
+    // Enable scrolling
     document.body.classList.remove("modal-open");
     document.querySelectorAll(".background-element").forEach(el => el.style.display = "block");
 }
 
 // Testimonies
 
-function disableHorizontalScroll() {
-    document.body.style.overflowX = "hidden";
-}
-
-function enableHorizontalScroll() {
-    document.body.style.overflowX = "";
-}
-
 function testimonyOpenPopup(element) {
-    const videoSrc = element.getAttribute("data-video");
-    const videoIframe = document.getElementById("testimony-popup-video");
-
-    // Reset and load video
-    videoIframe.src = "";
+    var videoSrc = element.getAttribute("data-video");
+    let videoIframe = document.getElementById("testimony-popup-video");
+    videoIframe.src = ""; // Force reset first
     setTimeout(() => {
         videoIframe.src = videoSrc;
-    }, 100);
+    }, 100); // Small delay to ensure reset
 
     // Show modal
     document.getElementById("testimony-overlay").style.display = "block";
     document.getElementById("testimony-popup").style.display = "block";
 
-    // Disable scrolling
+   // Disable scrolling
     document.body.classList.add("modal-open");
 
-    // ✅ Disable horizontal scroll (if this function is defined)
-    if (typeof disableHorizontalScroll === "function") {
+//  Disable Horizontal scrolling
+    window.testimonyOpenPopup = function (element) {
+        document.getElementById("testimony-overlay").style.display = "block";
+        document.getElementById("testimony-popup").style.display = "block";
         disableHorizontalScroll();
-    }
+    };
+
 }
 
 function testimonyClosePopup() {
     // Hide modal
     document.getElementById("testimony-overlay").style.display = "none";
     document.getElementById("testimony-popup").style.display = "none";
+    document.body.classList.add("modal-open"); // Prevents background scrolling
 
-    // Stop video playback
-    const videoIframe = document.getElementById("testimony-popup-video");
-    videoIframe.src = "";
+    // Stop video playback by resetting the iframe source
+    document.getElementById("testimony-popup-video").src = "";
 
-    // Re-enable scrolling
+    // Enable vertical scrolling
     document.body.classList.remove("modal-open");
 
-    // ✅ Re-enable horizontal scroll
-    enableHorizontalScroll();
+    // Enable horizontal scrolling
+    window.testimonyClosePopup = function () {
+        document.getElementById("testimony-overlay").style.display = "none";
+        document.getElementById("testimony-popup").style.display = "none";
+        document.body.classList.remove("modal-open"); // Re-enable scrolling
+        enableHorizontalScroll();
+    };
+
+    // ensure video is closed
+    let videoIframe = document.getElementById("testimony-popup-video");
+    videoIframe.src = "";  // Reset src to stop playing
+
 }
 
