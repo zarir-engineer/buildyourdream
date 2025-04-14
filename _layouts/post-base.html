@@ -37,6 +37,7 @@ layout: base
               <div class="description">
                   <div class="post-content scrolla-element-anim-1 scroll-animate" data-animate="active">
                       <p class="lead">{{ page.lead_text }}</p>
+<!--                        #TODO take format from post as it is check if it exists and add-->
                       {{ content }}  <!-- This renders the actual Markdown content -->
                       {% if page.tags %}
                         <span class="tags-links">
@@ -48,12 +49,14 @@ layout: base
                       {% endif %}
                   </div>
               </div>
+
+
               <!-- Comments Section -->
               <div class="comments-post scrolla-element-anim-1 scroll-animate" data-animate="active">
                 <div class="section__comments" id="comments-container">
-                  <div id="comments-list"></div>
+
                   <!-- Comment  Form -->
-                  <div class="form-comment">
+                  <div class="form-comment" style="display: block !important; visibility: visible !important; opacity: 1 !important; position: relative; z-index: 9999; border: 2px solid red;">
                     <div class="comment-respond">
                       <div class="m-titles">
                         <div class="m-title align-left">Leave a comment</div>
@@ -85,9 +88,41 @@ layout: base
                       </form>
                     </div>
                   </div>
+                  <!-- Popup for Comment Submission Message -->
+                  <div id="commentPopup" class="modal">
+                    <div class="modal-content">
+                      <p id="commentMessage"></p>
+                      <button onclick="closePopup()">OK</button>
+                    </div>
+                  </div>
+
+                  <!-- Comment Count -->
+                  <div class="m-titles">
+                    <div class="m-title align-left">
+                      <div id="comment-count">Loading comments...</div>
+                    </div>
+                  </div>
+                  {% if comments %}
+                    <div class="comments-list">
+                      {% for comment in comments %}
+                        <div class="comment" data-comment-id="{{ comment._id }}" id="comment-{{ comment._id }}">
+                          <div class="comment-header">
+                            <strong>{{ comment.name }}</strong> · {{ comment.date }}
+                          </div>
+                          <div class="comment-body">
+                            {{ comment.comment }}
+                          </div>
+                          <div class="comment-actions">
+                            <a href="#" onclick="showReplyForm('{{ comment._id }}'); return false;">Reply</a>
+                          </div>
+                          <div id="reply-box-{{ comment._id }}"></div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+
                 </div>
               </div>
-
 
           </div>
       </div>

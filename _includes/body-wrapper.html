@@ -87,43 +87,27 @@
         <div class="v-line v-line-right">
             <div class="container">
                 <div class="swiper-container js-services scrolla-element-anim-1 scroll-animate" data-animate="active">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            {% include buying.html %}
-                        </div>
-                        <div class="swiper-slide">
-                            {% include selling.html %}
-                        </div>
-                        <div class="swiper-slide">
-                            {% include leasing.html %}
-                        </div>
-                        <div class="swiper-slide">
-                            {% include advisor.html %}
-                        </div>
-                        <div class="swiper-slide">
-                            {% include after-sales.html %}
-                        </div>
+                <div class="swiper-wrapper">
+                    <div id="overlay" onclick="togglePopup()"></div>
+                    <div class="swiper-slide">
+                        {% include buying.html %}
                     </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-
-                <!-- ✅ Keep only one overlay -->
-                <div id="overlay" onclick="closePopup()"></div>
-
-                <!-- ✅ Popup should be here too -->
-                <div id="popup-content" class="modal">
-                    <div class="modal-inner">
-                        <div id="popup-image" class="modal-image"></div>
-                        <h2 id="popup-title" class="text-2xl font-bold"></h2>
-                        <p id="popup-description" class="text-base text-gray-600 mt-2"></p>
-
-                        <!-- Markdown content goes here -->
-                        <div id="popup-mdtext" class="text-lg leading-relaxed mt-4"></div>
-
-                        <button onclick="closePopup()" class="mt-4">Close</button>
+                    <div class="swiper-slide">
+                        {% include selling.html %}
+                    </div>
+                    <div class="swiper-slide">
+                        {% include leasing.html %}
+                    </div>
+                    <div class="swiper-slide">
+                        {% include advisor.html %}
+                    </div>
+                    <div class="swiper-slide">
+                        {% include after-sales.html %}
                     </div>
                 </div>
+                <div class="swiper-pagination"></div>
 
+            </div>
                 <div class="lui-bgtitle">
                     <span> Services </span>
                 </div>
