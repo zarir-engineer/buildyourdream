@@ -1,0 +1,87 @@
+/* Fullscreen Modal for Services */
+#popup-modal {
+    background-color: rgba(255, 255, 255, 1); /* Remove the transparency */
+    z-index: 1050;
+    position: fixed;
+    top: 0;  /* Make sure it covers the full viewport */
+    left: 0;
+    width: 100vw; /* Fullscreen width */
+    height: 100vh; /* Fullscreen height */
+    padding: 0; /* Remove padding if needed */
+    border-radius: 0; /* Optional, to remove rounded corners for fullscreen */
+}
+
+/* Popup Content (now fullscreen) */
+#popup-content {
+    display: block;  /* Ensure it's visible */
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(0, 0); /* Reset the transform for fullscreen */
+    background: white;  /* Ensure the modal background is solid */
+    padding: 0; /* Optional, adjust as per your design */
+    z-index: 1000000 !important;
+    width: 100%;  /* Full width */
+    height: 100%;  /* Full height */
+    overflow: auto; /* Allows scrolling if content overflows */
+}
+
+/* Overlay (will be hidden) */
+#overlay {
+    display: none; /* Don't show the overlay in the services modal */
+}
+
+/* Optional: You can also remove the shadow if you prefer */
+#popup-content {
+    box-shadow: none; /* Remove shadow for fullscreen look */
+}
+
+/* Close button - adjusted if necessary */
+.close-btn {
+    background: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.modal-content {
+  border-radius: 0;
+  height: 100vh;
+}
+
+#popup-modal .btn {
+  padding: 10px 30px;
+  font-size: 16px;
+}
+
+.modal-body {
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
+}
+
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide in animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
