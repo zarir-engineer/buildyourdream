@@ -333,7 +333,7 @@ Pellentesque lectus sapien, maximus id gravida sit amet, tristique non eros.</p>
                       </div>
                       <form id="comment-form">
                         <input type="hidden" name="options[slug]" value="2025-02-12-repurposing-old-window-frames-slug">
-                        <input type="hidden" name="fields[date]" value="2025-04-14">
+                        <input type="hidden" name="fields[date]" value="2025-04-15">
 
                         <div class="group-row">
                           <div class="group">
@@ -499,17 +499,15 @@ Pellentesque lectus sapien, maximus id gravida sit amet, tristique non eros.</p>
 
     <!-- Modal and Overlay (Global) -->
     <div id="overlay" onclick="closePopup()"></div>
-    <div id="popup-content">
+    <div id="popup-content" style="display:none;">
         <div class="services-item">
             <div class="lui-subtitle">
-                <span id="popup-title">Buying</span> <!-- This will be dynamically updated -->
+                <span id="popup-title"></span> <!-- Empty by default -->
             </div>
             <div class="lui-text">
-                <div>
-                    <p id="popup-description">................................................</p>
-                </div>
+                <p id="popup-description"></p> <!-- Will be filled by JS -->
             </div>
-            <div class="image" id="popup-image" style="background-image: url(assets/images/pat-2.png);"></div>
+            <div class="image" id="popup-image"></div> <!-- Image set via background -->
         </div>
         <button onclick="closePopup()">Close</button>
     </div>
