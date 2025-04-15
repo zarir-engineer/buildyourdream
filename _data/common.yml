@@ -9,6 +9,7 @@ common-css:
   - "/assets/css/dark.css"
   - "/assets/css/testimonials.css"
   - "/assets/css/services.css"
+  - "/assets/css/pagination.css"
   - "/assets/css/thank-you.css"
   - "/assets/css/comment-popup.css"
 

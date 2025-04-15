@@ -1,0 +1,70 @@
+<!-- Section - Blog -->
+<section class="lui-section lui-gradient-top" id="blog-section">
+  <!-- Heading -->
+  <div class="lui-heading">
+    <div class="container">
+      <div class="m-titles align-center">
+        <h2 class="m-title splitting-text-anim-1 scroll-animate" data-splitting="words" data-animate="active">
+          <span> Latest Blog </span>
+        </h2>
+        <div class="m-subtitle splitting-text-anim-1 scroll-animate" data-splitting="words" data-animate="active">
+          <span> my <b>Articles and Advice</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Archive -->
+  <div class="v-line v-line-right">
+    <div class="container">
+      <div class="blog-items row" id="blog-posts">
+        {% for post in paginator.posts %}
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <div class="archive-item scrolla-element-anim-1 scroll-animate" data-animate="active">
+            <div class="image">
+              <a href="{{ post.url }}">
+                <img decoding="async" src="{{ post.image | default: 'assets/images/default.jpg' }}" alt="{{ post.title }}">
+              </a>
+            </div>
+            <div class="desc">
+              <div class="category lui-subtitle">
+                <span>{{ post.date | date: '%B %d, %Y' }}</span>
+              </div>
+              <h5 class="lui-title">
+                <a href="{{ post.url }}">{{ post.title }}</a>
+              </h5>
+              <div class="lui-text">
+                <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+                <div class="readmore">
+                  <a href="{{ post.url }}" class="lnk">Read more</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Pagination Controls (optional, if you want to limit posts per page) -->
+      <div class="pagination pagination-controls text-center">
+        {% if paginator.previous_page %}
+          <a href="{{ paginator.previous_page_path }}" class="prev">Previous</a>
+        {% endif %}
+        <span>Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+        {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+        {% endif %}
+      </div>
+
+      <div class="load-more">
+        <a href="{{ site.baseurl }}/all-blogs/" class="btn scrolla-element-anim-1 scroll-animate" data-animate="active">
+          <span>View Blog</span>
+        </a>
+      </div>
+
+      <div class="lui-bgtitle">
+        <span> Blog </span>
+      </div>
+    </div>
+  </div>
+</section>
