@@ -1,52 +1,64 @@
 ---
 layout: base
 ---
-<!-- Just some nice to have styles for the pager buttons -->
-<style>
-  ul.pager { text-align: center; list-style: none; }
-  ul.pager li {display: inline;border: 1px solid black; padding: 10px; margin: 5px;}
-</style>
 
-<div class="home">
+<!-- Main Blog Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
 
-  <h1 class="page-heading">Posts</h1>
+      <!-- Blog Header -->
+      <div class="text-center mb-5">
+        <h1 class="page-heading">Latest Articles</h1>
+        <p class="lead">Browse all our posts</p>
+      </div>
 
-  {{ content }}
+      <!-- Posts List -->
+      <div class="blog-list">
+        {% for post in paginator.posts %}
+        <article class="post-preview mb-5">
+          <div class="post-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">
+              {{ post.date | date: "%B %-d, %Y" }}
+            </time>
+          </div>
 
-  <ul class="post-list">
-    <!--
-        Here is the main paginator logic called.
-        All calls to site.posts should be replaced by paginator.posts
-    -->
-    {% for post in paginator.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+          <h2 class="post-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          </h2>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+          <div class="post-excerpt">
+            {{ post.excerpt | strip_html | truncatewords: 30 }}
+          </div>
 
-  <!--
-    Showing buttons to move to the next and to the previous list of posts (pager buttons).
-  -->
-  {% if paginator.total_pages > 1 %}
-  <ul class="pager">
-      {% if paginator.previous_page %}
-      <li class="previous">
-          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
-      </li>
-      {% endif %}
-      {% if paginator.next_page %}
-      <li class="next">
-          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
-      </li>
-      {% endif %}
-  </ul>
-  {% endif %}
+          <a href="{{ post.url | relative_url }}" class="read-more">
+            Continue Reading <i class="fas fa-arrow-right"></i>
+          </a>
+        </article>
+        {% endfor %}
+      </div>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+      <!-- Pagination (Improved) -->
+      <nav aria-label="Blog pagination">
+        <ul class="pagination justify-content-center">
+          {% if paginator.previous_page %}
+          <li class="page-item">
+            <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}">
+              &laquo; Newer
+            </a>
+          </li>
+          {% endif %}
 
+          {% if paginator.next_page %}
+          <li class="page-item ms-auto">
+            <a class="page-link" href="{{ paginator.next_page_path | relative_url }}">
+              Older &raquo;
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+
+    </div>
+  </div>
 </div>

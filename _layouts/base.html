@@ -1,25 +1,17 @@
 ---
 ---
-
 <!DOCTYPE html>
 <html lang="{{ page.language | default: site.language | default: 'en' }}">
-{% include head.html %}
-
-<body class="home light-skin">
-	<div class="container-page">
-        {% include header.html %}
-
-        {% include gtm_body.html %}
-
-        {{ content }}
-
-        {% include footer.html %}
+  {% include head.html %}
+  <body class="{{ page.body_class | default: 'light-skin' }}">
+    <div class="container-page">
+      {% include header.html %}
+      {% include gtm_body.html %}
+      {{ content }}
+      {% include footer.html %}
     </div>
-
     {% include footer-scripts.html %}
-
-    <!-- Other page content -->
-
-    {% incldue popup-modal.html %}
-</body>
+    {% include services-popup-modal.html %}
+    {% include testimonials-popup-modal.html %}
+  </body>
 </html>
