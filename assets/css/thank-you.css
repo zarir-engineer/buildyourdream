@@ -1,37 +1,37 @@
-.thank-you-container {
-    text-align: center;
-    margin: 50px auto;
-    max-width: 600px;
-}
-
-.thank-you-container h1 {
-    font-size: 2em;
-    color: #333;
-}
-
-.thank-you-container p {
-    font-size: 1.2em;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.thank-you-image {
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
     width: 100%;
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    padding-top: 60px;
 }
 
-.btn {
-    display: inline-block;
-    background: #ff6600;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
     font-weight: bold;
 }
 
-.btn:hover {
-    background: #e65c00;
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
