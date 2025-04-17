@@ -107,8 +107,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (commentForm) {
     commentForm.addEventListener("submit", async function (e) {
       e.preventDefault();
-      const name = commentForm.elements["name"].value.trim();
-      const comment = commentForm.elements["comment"].value.trim();
+      const name = commentForm.elements["fields[name]"].value.trim();
+      const comment = commentForm.elements["fields[comment]"].value.trim();
 
       if (!name || !comment) return;
 
@@ -125,7 +125,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-  loadComments();
 
   // Submit reply
   async function postReply(parent_id, name, comment) {

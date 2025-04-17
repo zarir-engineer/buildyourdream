@@ -7,6 +7,7 @@ common-css:
   - "/assets/css/vendors/animate.css"
   - "/assets/css/style.css"
   - "/assets/css/dark.css"
+  - "/assets/css/global-elements.css"
   - "/assets/css/testimonials.css"
   - "/assets/css/services.css"
   - "/assets/css/pagination.css"

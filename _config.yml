@@ -186,16 +186,20 @@ permalink: /blog/:title/
 # Simplify pagination
 pagination:
   enabled: true
-  per_page: 6
+  per_page: 5
   permalink: '/blog/page/:num/'
-  indexpage: '/blog/'
+  title: ':title - Page :num'
+  limit: 0
   sort_field: 'date'
   sort_reverse: true
+  trail:
+    before: 2
+    after: 2
 
 # Disable collections if not used
 collections:
   posts:
-    output: false
+    output: true
 
 quiet:    false
 defaults: []
