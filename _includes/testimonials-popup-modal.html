@@ -1,0 +1,33 @@
+<!-- Modal and Overlay (Global) -->
+<div id="overlay" class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50" onclick="closePopup()" style="display: none; z-index: 1050;"></div>
+
+<!-- Testimonial Popup Modal -->
+<div id="popup-content" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="popup-title"></h5>
+                <button type="button" class="btn-close" onclick="closePopup()" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body (Text + Image) -->
+            <div class="modal-body">
+                <div class="text-center">
+                    <!-- Testimonial Text -->
+                    <p id="popup-description" class="mb-4"></p>
+
+                    <!-- Image Section -->
+                    <div id="popup-image" class="mb-4" style="background-size: cover; background-position: center; height: 250px; width: 100%;"></div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div id="testimony-popup-footer">
+                <button class="global-close-btn" onclick="testimonyClosePopup()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

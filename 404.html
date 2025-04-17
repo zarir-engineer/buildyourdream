@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="HandheldFriendly" content="true">
@@ -74,7 +74,13 @@
     
       <link rel="stylesheet" href="/buildyourdream/assets/css/dark.css">
     
-      <link rel="stylesheet" href="/buildyourdream/assets/css/modal-videos.css">
+      <link rel="stylesheet" href="/buildyourdream/assets/css/global-elements.css">
+    
+      <link rel="stylesheet" href="/buildyourdream/assets/css/testimonials.css">
+    
+      <link rel="stylesheet" href="/buildyourdream/assets/css/services.css">
+    
+      <link rel="stylesheet" href="/buildyourdream/assets/css/pagination.css">
     
       <link rel="stylesheet" href="/buildyourdream/assets/css/thank-you.css">
     
@@ -113,10 +119,9 @@
 
 </head>
 
-
-<body class="home light-skin">
-	<div class="container-page">
-        <!-- Preloader -->
+  <body class="light-skin">
+    <div class="container-page">
+      <!-- Preloader -->
 <div class="preloader">
     <div class="centrize full-width">
         <div class="vertical-center">
@@ -137,7 +142,7 @@
 
     <!-- logo -->
     <div class="logo">
-      <a href="index.html">
+      <a href="/buildyourdream/">
         <img width="228" height="38" src="/buildyourdream/assets/images/zarir.png" alt="">
       </a>
     </div>
@@ -176,19 +181,19 @@
                         <div class="menu-full">
                             <ul class="menu-full">
                                 <li class="menu-item">
-                                    <a class="splitting-text-anim-2" data-splitting="chars" href="index.html">Home</a>
+                                    <a class="splitting-text-anim-2" data-splitting="chars" href="/buildyourdream">Home</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="splitting-text-anim-2" data-splitting="chars" href="#services-section">Services</a>
+                                    <a class="splitting-text-anim-2" data-splitting="chars" href="/buildyourdream/#services-section">Services</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="splitting-text-anim-2" data-splitting="chars" href="#testimonials-section">Testimonials</a>
+                                    <a class="splitting-text-anim-2" data-splitting="chars" href="/buildyourdream/#testimonials-section">Testimonials</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="splitting-text-anim-2" data-splitting="chars" href="#blog-section">Blog</a>
+                                    <a class="splitting-text-anim-2" data-splitting="chars" href="/buildyourdream/#blog-section">Blog</a>
                                 </li>
                                 <li class="menu-item">
-                                    <a class="splitting-text-anim-2" data-splitting="chars" href="#contact-section">Contact</a>
+                                    <a class="splitting-text-anim-2" data-splitting="chars" href="/buildyourdream/#contact-section">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -218,11 +223,9 @@
 </header>
 
 
+      
 
-        
-
-
-        <div class="text-center">
+      <div class="text-center">
   <h1>Whoops, this page doesn't exist.</h1>
   <h1>Move along. (404 error)</h1>
   <br/>
@@ -230,8 +233,7 @@
   <img src="/buildyourdream/assets/images/404-southpark.jpg" alt="Not found" />
 </div>
 
-
-        <!-- Footer -->
+      <!-- Footer -->
 <div class="footer">
     <div class="footer__builder">
 <div class="container">
@@ -268,7 +270,6 @@
 </div>
 
     </div>
-
     <!-- cursor -->
 <div class="cursor"></div>
 
@@ -304,44 +305,75 @@
     
         <script src="/buildyourdream/assets/js/typed.js"></script>
     
-        <script src="/buildyourdream/assets/js/modal-videos.js"></script>
+        <script src="/buildyourdream/assets/js/testimonials.js"></script>
+    
+        <script src="/buildyourdream/assets/js/services.js"></script>
     
         <script src="/buildyourdream/assets/js/common.js"></script>
     
 
 
+    <div id="popup-modal" class="modal fade" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down modal-lg">
+    <div class="modal-content d-flex flex-column">
 
-    <!-- Other page content -->
+      <!-- Content -->
+      <div class="modal-body overflow-auto flex-grow-1 text-center px-3 px-md-5 py-4">
+        <h5 class="modal-title mb-3" id="popup-title"></h5>
+
+        <!-- Mobile-friendly image sizing -->
+        <img id="popup-image"
+             class="img-fluid mb-3 d-block mx-auto"
+             style="max-height: 200px; object-fit: contain;"
+             src=""
+             alt="Service Image" />
+
+        <p id="popup-description" class="text-muted mb-3 fs-6 fs-md-5"></p>
+        <div id="popup-full-text" class="text-sm text-gray-600" style="white-space: pre-wrap;"></div>
+      </div>
+
+      <!-- Bottom Close Button -->
+      <div class="modal-footer justify-content-center border-0">
+          <button class="global-close-btn" onclick="servicesClosePopup()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 
     <!-- Modal and Overlay (Global) -->
-    <div id="overlay" onclick="closePopup()"></div>
-    <div id="popup-content" style="display:none;">
-        <div class="services-item">
-            <div class="lui-subtitle">
-                <span id="popup-title"></span> <!-- Empty by default -->
+<div id="overlay" class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50" onclick="closePopup()" style="display: none; z-index: 1050;"></div>
+
+<!-- Testimonial Popup Modal -->
+<div id="popup-content" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="popup-title"></h5>
+                <button type="button" class="btn-close" onclick="closePopup()" aria-label="Close"></button>
             </div>
-            <div class="lui-text">
-                <p id="popup-description"></p> <!-- Will be filled by JS -->
+
+            <!-- Modal Body (Text + Image) -->
+            <div class="modal-body">
+                <div class="text-center">
+                    <!-- Testimonial Text -->
+                    <p id="popup-description" class="mb-4"></p>
+
+                    <!-- Image Section -->
+                    <div id="popup-image" class="mb-4" style="background-size: cover; background-position: center; height: 250px; width: 100%;"></div>
+                </div>
             </div>
-            <div class="image" id="popup-image"></div> <!-- Image set via background -->
+
+            <!-- Modal Footer -->
+            <div id="testimony-popup-footer">
+                <button class="global-close-btn" onclick="testimonyClosePopup()">Close</button>
+            </div>
+
         </div>
-        <button onclick="closePopup()">Close</button>
     </div>
+</div>
 
-    <!-- Scripts -->
-    <script>
-    function togglePopup() {
-        var popup = document.getElementById("popup-content");
-        var overlay = document.getElementById("overlay");
-        if (popup.style.display === "none" || popup.style.display === "") {
-            popup.style.display = "block";
-            overlay.style.display = "block";
-        } else {
-            popup.style.display = "none";
-            overlay.style.display = "none";
-        }
-    }
-    </script>
-
-</body>
+  </body>
 </html>

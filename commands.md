@@ -1,1 +1,0 @@
-#### ffmpeg -i exploring-south-mumbai.jpg -vf "scale=1920:1080" 1920-1080-exploring-south-mumbai.jpg

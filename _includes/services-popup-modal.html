@@ -1,0 +1,27 @@
+<div id="popup-modal" class="modal fade" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down modal-lg">
+    <div class="modal-content d-flex flex-column">
+
+      <!-- Content -->
+      <div class="modal-body overflow-auto flex-grow-1 text-center px-3 px-md-5 py-4">
+        <h5 class="modal-title mb-3" id="popup-title"></h5>
+
+        <!-- Mobile-friendly image sizing -->
+        <img id="popup-image"
+             class="img-fluid mb-3 d-block mx-auto"
+             style="max-height: 200px; object-fit: contain;"
+             src=""
+             alt="Service Image" />
+
+        <p id="popup-description" class="text-muted mb-3 fs-6 fs-md-5"></p>
+        <div id="popup-full-text" class="text-sm text-gray-600" style="white-space: pre-wrap;"></div>
+      </div>
+
+      <!-- Bottom Close Button -->
+      <div class="modal-footer justify-content-center border-0">
+          <button class="global-close-btn" onclick="servicesClosePopup()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

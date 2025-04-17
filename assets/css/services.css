@@ -1,0 +1,59 @@
+/* Make modal fullscreen on small screens, large on desktops */
+/* You already handle this via modal-fullscreen-sm-down + modal-lg in HTML */
+
+/* Ensure modal background is solid (optional tweak) */
+#popup-modal .modal-content {
+  background-color: white;
+  border-radius: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure modal body scrolls if content is long */
+.modal-body {
+  overflow-y: auto;
+  max-height: calc(100vh - 100px); /* Room for footer */
+}
+
+/* Close button styling */
+#popup-modal .btn {
+  padding: 10px 30px;
+  font-size: 16px;
+  z-index: 1060 !important; /* Above Bootstrap backdrop */
+  position: relative;
+}
+
+/* Optional: Floating close button if used outside modal-footer */
+.close-btn {
+  background: red;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1060 !important;
+}
+
+/* Optional: Animation styles */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

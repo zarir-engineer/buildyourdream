@@ -1,54 +1,17 @@
 ---
 ---
-
 <!DOCTYPE html>
 <html lang="{{ page.language | default: site.language | default: 'en' }}">
-{% include head.html %}
-
-<body class="home light-skin">
-	<div class="container-page">
-        {% include header.html %}
-
-        {% include gtm_body.html %}
-
-        {{ content }}
-
-        {% include footer.html %}
+  {% include head.html %}
+  <body class="{{ page.body_class | default: 'light-skin' }}">
+    <div class="container-page">
+      {% include header.html %}
+      {% include gtm_body.html %}
+      {{ content }}
+      {% include footer.html %}
     </div>
-
     {% include footer-scripts.html %}
-
-    <!-- Other page content -->
-
-    <!-- Modal and Overlay (Global) -->
-    <div id="overlay" onclick="closePopup()"></div>
-    <div id="popup-content" style="display:none;">
-        <div class="services-item">
-            <div class="lui-subtitle">
-                <span id="popup-title"></span> <!-- Empty by default -->
-            </div>
-            <div class="lui-text">
-                <p id="popup-description"></p> <!-- Will be filled by JS -->
-            </div>
-            <div class="image" id="popup-image"></div> <!-- Image set via background -->
-        </div>
-        <button onclick="closePopup()">Close</button>
-    </div>
-
-    <!-- Scripts -->
-    <script>
-    function togglePopup() {
-        var popup = document.getElementById("popup-content");
-        var overlay = document.getElementById("overlay");
-        if (popup.style.display === "none" || popup.style.display === "") {
-            popup.style.display = "block";
-            overlay.style.display = "block";
-        } else {
-            popup.style.display = "none";
-            overlay.style.display = "none";
-        }
-    }
-    </script>
-
-</body>
+    {% include services-popup-modal.html %}
+    {% include testimonials-popup-modal.html %}
+  </body>
 </html>

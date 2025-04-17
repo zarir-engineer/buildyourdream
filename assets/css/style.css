@@ -44,6 +44,12 @@ Version: 1.0
 * Base Styles
 **/
 
+/* blog */
+.archive-item .image {
+  aspect-ratio: 16/9;
+  background: #f5f5f5;
+}
+
 /* Add padding or margin to indent replies */
 .comment-item.reply {
   margin-left: 20px;  /* Adjust the left margin to control the indentation */

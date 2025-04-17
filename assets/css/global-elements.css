@@ -1,0 +1,31 @@
+/* Global Close Button Style */
+.global-close-btn {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1100; /* Ensure it's always on top */
+}
+
+.global-close-btn:hover {
+    background-color: #555;
+    transform: scale(1.05); /* Slight grow effect for hover */
+}
+
+.global-close-btn:focus {
+    outline: none;
+}
+
+/* Close button styling for specific modals if needed */
+#testimony-closeModalBtn,
+#popup-closeModalBtn,
+#comment-closeModalBtn {
+    top: 15px; /* Adjust for specific positioning if necessary */
+}
