@@ -1,4 +1,23 @@
 /* Global Close Button Style */
+.btn-close-custom {
+  background-color: #f8f4f1; /* match page background */
+  color: black;
+  border: 2px solid #000;
+  border-radius: 999px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  font-family: 'inherit'; /* Optional - match rest */
+  box-shadow: 2px 2px 0 #000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-close-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 #000;
+}
+
 .global-close-btn {
     padding: 10px 20px;
     background-color: #333;
@@ -14,7 +33,7 @@
     z-index: 1100; /* Ensure it's always on top */
 }
 
-.global-close-btn:hover {
+.global-close-btn:hover{
     background-color: #555;
     transform: scale(1.05); /* Slight grow effect for hover */
 }
