@@ -6,10 +6,6 @@ function servicesOpenPopup(element) {
     const image = element.getAttribute("data-image");
     const fulltext = element.getAttribute("data-fulltext");
 
-    console.log('+++ keyword ', keyword);
-    console.log('+++ description ', description);
-    console.log('+++ image ', image);
-
     // Update modal content
     document.getElementById("popup-title").innerText = keyword;
     document.getElementById("popup-description").innerText = description;
@@ -17,7 +13,11 @@ function servicesOpenPopup(element) {
     document.getElementById("popup-full-text").innerText = fulltext || "";
 
     // Show Bootstrap modal
-    const popupModal = new bootstrap.Modal(document.getElementById('popup-modal'));
+    const popupModal = new bootstrap.Modal(document.getElementById('popup-modal'), {
+        backdrop: false,
+        keyboard: true // optional: allows Esc to close
+    });
+
     popupModal.show();
 }
 

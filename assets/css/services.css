@@ -1,6 +1,18 @@
 /* Make modal fullscreen on small screens, large on desktops */
 /* You already handle this via modal-fullscreen-sm-down + modal-lg in HTML */
 
+#popup-modal {
+  position: fixed; /* Ensures it overlays everything */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1055; /* Must be higher than your content */
+  overflow: hidden;
+  background-color: white; /* Optional: solid white background */
+}
+
+
 /* Ensure modal background is solid (optional tweak) */
 #popup-modal .modal-content {
   background-color: white;
@@ -8,6 +20,12 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  /* Optional padding */
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 100%;
+  margin: auto;
+
 }
 
 /* Ensure modal body scrolls if content is long */
@@ -56,4 +74,33 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* Custom wider modal size for desktop */
+@media (min-width: 768px) {
+  .modal-xl-custom {
+    max-width: 90vw; /* Or try 1000px, 1100px etc. */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.floating-close-wrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100; /* Above modal content */
+  pointer-events: none; /* Prevent overlapping issues */
+}
+
+.floating-close-wrapper .global-close-btn {
+  pointer-events: all; /* Re-enable interaction only for button */
+}
+
+
+.modal-backdrop.show {
+  backdrop-filter: blur(2px); /* Optional: slight blur for modern touch */
+  transition: background-color 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.3); /* Gray with transparency */
 }
