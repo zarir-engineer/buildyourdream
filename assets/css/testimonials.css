@@ -53,3 +53,7 @@
 body.modal-open {
   overflow: hidden;
 }
+
+body.modal-open .swiper-pagination-bullet {
+  display: none !important;
+}
