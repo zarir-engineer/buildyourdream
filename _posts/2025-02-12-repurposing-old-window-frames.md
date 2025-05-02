@@ -14,39 +14,30 @@ gallery:
 ---
 
 
-In the heart of **old Mumbai**, there’s a rhythm that never fades — the creak of antique wooden doors, the rustle of traders, and the gleam of hidden treasures in narrow alleys. Chor Bazaar, one of the city’s most storied markets, is where history isn’t just remembered — it’s **rebuilt**.
+In the bustling lanes of old Mumbai, stories live in wood — in carved beams, broken shutters, and forgotten window frames.  
 
-Here, old wooden furniture — window frames, door panels, ornate grills — is often scrapped from crumbling colonial buildings. But that's just the beginning of their story.
+Much of this timeless furniture finds its way to **Chor Bazaar**, where it’s not scrapped, but **reborn**. Skilled artisans lovingly restore old window panels, polish their textures, and turn them into gorgeous statement pieces. Tourists walk these narrow lanes wide-eyed, marveling at the craftsmanship — a kind of **time travel through timber**.
 
-Skilled local craftsmen, some whose families have worked in the bazaar for generations, restore these discarded frames. Using age-old techniques and a deep respect for the material, they **sand, stain, and seal** the wood until it gleams with a second life.
+---
 
-Vivamus interdum suscipit lacus. Nunc ultrices accumsan mattis. Aliquam vel sem vel velit efficitur malesuada.  
+### 🏡 Why This Matters
 
-These aren’t just home items — they’re pieces of **art and memory**, passed down, reimagined, and made new again.
+These restored pieces aren’t just decorative. They remind us of a **Mumbai that existed before the towers** — a Mumbai of wooden verandahs, breeze blocks, and neighbors who borrowed sugar, not just Wi-Fi.
 
-Nam dui mauris, congue vel nisi in, tempus gravida enim. Nulla et tristique orci.  
+And in neighborhoods like **Dadar Parsi Colony**, that sentiment still survives.
 
-Just a few minutes away from the chaos of central Mumbai lies **Dadar Parsi Colony** — serene, leafy, and full of **old-world grace**. Here, time moves differently. Walk through its lanes and you’ll see buildings that have stood for nearly a century — some still standing proud, others gently giving way to the future.
+There, buildings are quietly transforming. Some are being rebuilt entirely, others simply reimagined. It’s a graceful change — like a snake shedding its skin — not to discard the past, but to **make room for its continuation**.  
 
-Like a snake shedding its skin, many old structures are now making room for new ones — taller, modern, yet still respectful of their roots. But look closer. Behind those new facades, in many homes, you’ll still find **solid rosewood chests, art deco cabinets, and classic iron fans** humming quietly — **living testimonies to the Colony’s past**.
+Many homes still hold **old rosewood cabinets**, **folding writing desks**, and **iron latches** — echoes of a city that built slow and built strong.
 
-Nam dui mauris, congue vel nisi in, tempus gravida enim. Nulla et tristique orci.  
-Pellentesque lectus sapien, maximus id gravida sit amet, tristique non eros.
+> **The details are not the details. They make the design.**  
+> — *Charles Eames*
 
-> **Old places have soul.**  
-> — *Sarah Anderson*
-
-### Repurposing Ideas with Soul
-
-- Window frame photo walls using twine and pegs.
-- Vertical herb gardens from hanging planter slots.
-- Reclaimed windows turned into mirrors or headboards.
-- Gallery walls made with repainted, rustic frames.
+---
 
 ### Gallery
 <ul class="gallery gallery-columns-2">
-  {% assign images = "/assets/images/blog/chor-bazaar-frames.jpg|/assets/images/blog/artisan-refurbishing-frame.jpg|/assets/images/blog/window-frame-photo-wall.jpg|/assets/images/blog/window-planter.jpg" | split: "|" %}
-  {% for image in images %}
+  {% for image in page.gallery %}
   <li class="gallery-item">
     <figure>
       <img src="{{ image }}" alt="Gallery Image {{ forloop.index }}">
@@ -55,8 +46,11 @@ Pellentesque lectus sapien, maximus id gravida sit amet, tristique non eros.
   {% endfor %}
 </ul>
 
-Nam dui mauris, congue vel nisi in, tempus gravida enim. Nulla et tristique orci.  
+---
 
-To walk through South Mumbai — from Byculla to Dadar — is to walk through a **living museum**. The reclaimed wood, the lingering smell of varnish, the creak of an old fan — all speak softly of a time gone by.  
+### ✨ Why Buy in South Mumbai?
 
-Owning a flat here isn't just about space or amenities. It's about belonging to a story that’s still being written. No matter the price, the heritage of South Mumbai is **worth every rupee**.
+Because it isn’t just about square footage — it’s about **soul footage**.
+
+To live here is to own a piece of Mumbai’s story. When you walk down those lanes, you don’t just commute — **you belong**.  
+Every window frame, every hand-restored panel in Chor Bazaar is a whisper saying: *Don’t just look — live here.*
