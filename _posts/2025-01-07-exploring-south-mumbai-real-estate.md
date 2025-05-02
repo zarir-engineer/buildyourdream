@@ -3,7 +3,7 @@ title: Exploring South Mumbai Real Estate
 date:   2016-11-20 19:16:49 +0100
 categories: [Branding, Ui-design]
 tags: [south, mumbai, realty]
-featured_image: /assets/images/posts/1920-1080-exploring-south-mumbai.jpg
+featured_image: /assets/images/posts/1920-1080-exploring-south-mumbai.jpeg
 lead_text: A World of Luxury, Heritage, and Opportunity.
 layout: post-base
 author: admin
