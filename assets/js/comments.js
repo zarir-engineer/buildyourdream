@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const commentsContainer = document.getElementById("comments-container");
   const slug = window.location.pathname.split("/").filter(Boolean).join("-") + "-slug";
 
-  const API_URL = "https://jekyll-comments-backend-production-8c02.up.railway.app";
+  const API_URL = "https://my-comments-backend.onrender.com";
 
   // Load comments
   async function loadComments() {
